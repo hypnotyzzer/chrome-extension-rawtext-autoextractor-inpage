@@ -81,10 +81,14 @@ function extractTextFromMainBody() {
             tempText = tempText.replace(/\(|\[|\{/gmi, x => '<__SPLIT__> <__SPLIT__>' + x)
             // insert splitter before words as "pronouns"
             tempText = tempText.replace(/(^\b|\s)(je|tu|il|nous|vous|ils|on)(\b)/gim, x => '<__SPLIT__>' + x)
+            // insert splitter before words as "articles"
+            tempText = tempText.replace(/(^\b|\s)(à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une)(\b)/gim, x => '<__SPLIT__>' + x)
             // insert splitter before words as "Co-ordinating conjunction"
             tempText = tempText.replace(/(^\b|\s)(mais|où|et|donc|or|ni|car)(\b)/gim, x => '<__SPLIT__>' + x)
             // insert splitter before words as "possessive adjectives"
             tempText = tempText.replace(/(^\b|\s)(mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes)(\b)/gim, x => '<__SPLIT__>' + x)
+            // insert splitter before words as "prepositions"
+            tempText = tempText.replace(/(^\b|\s)(à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers)(\b)/gim, x => '<__SPLIT__>' + x)
 
             let splits = tempText.split(/<__SPLIT__>/g)
             splits.forEach(split => {
