@@ -150,8 +150,6 @@ extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
 extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
 extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
 extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
-// extractTextPortion("PREPOSITIONS 1", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers')
-// extractTextPortion("PREPOSITIONS 2", 'jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
 
 
 console.log(rawArticle);
