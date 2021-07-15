@@ -112,12 +112,16 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     rawArticle += titleAsType + ' : \n\n';
     rawArticle += '------------- \n\n';
 
-    // extraction of text portion
-    const regex = new RegExp('(\\b)(' + regExFormula + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
-    let tempText = (htmlTextsFromPage.match(regex) || ['No data available.'])
-        .map(x => x.trim())
-        .sort()
-        .join('\n')
+    let tempText = ""
+    let regexs = regExFormula.split('|')
+    regexs.forEach(regx => {
+        // extraction of text portion
+        const regex = new RegExp('(\\b)(' + regExFormula + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
+        tempText += (htmlTextsFromPage.match(regex) || ['No data available.'])
+            .map(x => x.trim())
+            .sort()
+            .join('\n')
+    });
 
     rawArticle += tempText
 
