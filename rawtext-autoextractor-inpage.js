@@ -116,7 +116,7 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     let regexs = regExFormula.split('|')
     regexs.forEach(regx => {
         // extraction of text portion
-        const regex = new RegExp('(\\b)(' + regExFormula + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
+        const regex = new RegExp('(\\b)(' + regx + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
         tempText += (htmlTextsFromPage.match(regex) || ['No data available.'])
             .map(x => x.trim())
             .sort()
