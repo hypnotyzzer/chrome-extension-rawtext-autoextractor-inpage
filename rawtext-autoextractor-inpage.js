@@ -120,8 +120,8 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
         const regex = new RegExp('(\\b)(' + regx + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
         matchs = matchs.concat(htmlTextsFromPage.match(regex) || ['No data available.'])
     });
-    matchs = [...new Set(matchs)]
-    tempText = matchs
+    let uniques = [...new Set(matchs)]
+    tempText = uniques
         .map(x => x.trim())
         .sort()
         .join('\n')
