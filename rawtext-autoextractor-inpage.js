@@ -141,6 +141,7 @@ function getWordsOccurencesReport() {
     rawArticle += 'WORDS OCCURENCES REPORT' + ' : \n\n';
     rawArticle += '------------- \n\n';
 
+    let blacklist = 'je|tu|il|nous|vous|ils|on|à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une|mais|où|et|donc|or|ni|car|mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes|à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers'
     let text = htmlTextsFromPage.toLowerCase()
     let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
     let occurencesReport = allWords
@@ -162,6 +163,7 @@ function getWordsOccurencesReport() {
 
 
     let formattedReport = occurencesReport
+        .filter(x => !blacklist.includes(x))
         .map((x, i) => {
             let rank = (i + 1).toString().padStart(4, '0')
             let spaces = new Array(Math.abs(33 - x.text.length)).join(' ')
