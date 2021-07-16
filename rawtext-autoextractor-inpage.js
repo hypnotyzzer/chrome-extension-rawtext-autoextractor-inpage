@@ -137,6 +137,41 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     rawArticle += '\n\n' + separator + '\n\n';
 }
 
+function getWordsOccurencesReport() {
+    rawArticle += 'WORDS OCCURENCES REPORT' + ' : \n\n';
+    rawArticle += '------------- \n\n';
+
+    let text = htmlTextsFromPage.toLowerCase()
+    let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
+    debugger
+    let occurencesReport = allWords
+        .filter(x => x.length > 0)
+        .reduce((acc, val) => {
+            if (!acc.includes(val)) {
+                acc.push(val)
+            }
+            return acc
+        }, [])
+        .map(x => {
+            debugger
+            let occurences = allWords.filter(y => y == x).length
+            return {
+                text: x,
+                occurences
+            }
+        })
+        .sort((a, b) => b.occurences - a.occurences)
+
+    console.table(occurencesReport)
+
+    rawArticle += occurencesReport
+
+    // always display results in console
+    rawArticle += '\n\n' + separator + '\n\n';
+
+}
+
+
 /**
  * Insert destructured data into HTML page with a "pre" tag.
  */
@@ -166,7 +201,7 @@ extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
 extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
 extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
 extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
-
+getWordsOccurencesReport()
 
 console.log(rawArticle);
 injectPreInHTML()
