@@ -143,7 +143,6 @@ function getWordsOccurencesReport() {
 
     let text = htmlTextsFromPage.toLowerCase()
     let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
-    debugger
     let occurencesReport = allWords
         .filter(x => x.length > 0)
         .reduce((acc, val) => {
@@ -153,7 +152,6 @@ function getWordsOccurencesReport() {
             return acc
         }, [])
         .map(x => {
-            debugger
             let occurences = allWords.filter(y => y == x).length
             return {
                 text: x,
@@ -162,13 +160,21 @@ function getWordsOccurencesReport() {
         })
         .sort((a, b) => b.occurences - a.occurences)
 
-    console.table(occurencesReport)
 
-    rawArticle += occurencesReport
+    let formattedReport = occurencesReport
+        .map((x, i) => {
+            let rank = (i + 1).toString().padStart(4, '0')
+            let spaces = new Array(Math.abs(33 - x.text.length)).join(' ')
+            return `${rank} -\t ${x.text} - ${spaces} ${x.occurences}`
+        })
+        .join('\n')
+
+    rawArticle += formattedReport
 
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
 
+    console.table(occurencesReport)
 }
 
 
