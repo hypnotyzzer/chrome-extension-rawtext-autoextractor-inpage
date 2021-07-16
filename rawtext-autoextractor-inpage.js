@@ -165,7 +165,7 @@ function getWordsOccurencesReport() {
         .map((x, i) => {
             let rank = (i + 1).toString().padStart(4, '0')
             let spaces = new Array(Math.abs(33 - x.text.length)).join(' ')
-            return `${rank} -\t ${x.text} - ${spaces} ${x.occurences}`
+            return `${rank} -\t ${x.text} ${spaces} ${x.occurences}`
         })
         .join('\n')
 
