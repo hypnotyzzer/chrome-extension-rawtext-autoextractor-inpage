@@ -211,7 +211,7 @@ function injectButtonInHTML() {
         let btn = document.createElement("button")
         btn.innerText = 'Get Orasyo report'
         btn.style.position = 'fixed';
-        btn.style.bottom = '3%';
+        btn.style.bottom = '33px';
         btn.style.right = '13px';
         btn.style.padding = '0.33rem';
         btn.style.backgroundColor = 'black';
