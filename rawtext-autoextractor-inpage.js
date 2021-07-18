@@ -186,6 +186,7 @@ function getWordsOccurencesReport() {
 function injectPreInHTML() {
     if (window) {
         let pre = document.createElement("PRE")
+        pre.id = 'orasyo-rawArticle'
         pre.innerText = rawArticle
         pre.style.margin = '1.1rem';
         pre.style.padding = '1.1rem';
@@ -197,6 +198,7 @@ function injectPreInHTML() {
         pre.style.fontFamily = '"Lucida Console", "Courier New", monospace';
         pre.style.zIndex = '99999';
         document.body.appendChild(pre)
+        pre.scrollIntoView({ behavior: 'smooth' })
     }
 }
 
@@ -216,23 +218,26 @@ function injectButtonInHTML() {
         btn.style.color = 'dodgerblue';
         btn.style.fontFamily = '"Lucida Console", "Courier New", monospace';
         btn.style.zIndex = '99999';
-        btn.onclick = injectPreInHTML()
+        btn.onclick = () => {
+            insertHeader()
+            extractAllTitles()
+            extractTextFromMainBody()
+            extractTextPortion("PRONOMS", 'je|tu|il|nous|vous|ils|on')
+            extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
+            extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
+            extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
+            extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
+            getWordsOccurencesReport()
+            console.log(rawArticle);
+
+            injectPreInHTML()
+        }
         document.body.appendChild(btn)
     }
 }
 
 
-insertHeader()
-extractAllTitles()
-extractTextFromMainBody()
-extractTextPortion("PRONOMS", 'je|tu|il|nous|vous|ils|on')
-extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
-extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
-extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
-extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
-getWordsOccurencesReport()
 
-console.log(rawArticle);
 injectButtonInHTML()
 
 
