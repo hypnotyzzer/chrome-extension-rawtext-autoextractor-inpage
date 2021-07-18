@@ -211,13 +211,20 @@ function injectButtonInHTML() {
         let btn = document.createElement("button")
         btn.innerText = 'Get Orasyo report'
         btn.style.position = 'fixed';
-        btn.style.top = '50%';
-        btn.style.right = '7px';
-        btn.style.padding = '1.1rem';
+        btn.style.bottom = '3%';
+        btn.style.right = '13px';
+        btn.style.padding = '0.33rem';
         btn.style.backgroundColor = 'black';
         btn.style.color = 'dodgerblue';
         btn.style.fontFamily = '"Lucida Console", "Courier New", monospace';
         btn.style.zIndex = '99999';
+        btn.style.opacity = .33;
+        btn.onmouseover = () => {
+            btn.style.opacity = 1
+        }
+        btn.onmouseleave = () => {
+            btn.style.opacity = .33
+        }
         btn.onclick = () => {
             insertHeader()
             extractAllTitles()
