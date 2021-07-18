@@ -201,6 +201,27 @@ function injectPreInHTML() {
 }
 
 
+/**
+ * Insert destructured data into HTML page with a "pre" tag.
+ */
+function injectButtonInHTML() {
+    if (window) {
+        let btn = document.createElement("button")
+        btn.innerText = 'Get Orasyo report'
+        btn.style.position = 'fixed';
+        btn.style.top = '50%';
+        btn.style.right = '7px';
+        btn.style.padding = '1.1rem';
+        btn.style.backgroundColor = 'black';
+        btn.style.color = 'dodgerblue';
+        btn.style.fontFamily = '"Lucida Console", "Courier New", monospace';
+        btn.style.zIndex = '99999';
+        btn.onclick = injectPreInHTML()
+        document.body.appendChild(btn)
+    }
+}
+
+
 insertHeader()
 extractAllTitles()
 extractTextFromMainBody()
@@ -212,6 +233,6 @@ extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|
 getWordsOccurencesReport()
 
 console.log(rawArticle);
-injectPreInHTML()
+injectButtonInHTML()
 
 
