@@ -1,5 +1,5 @@
 //console.clear();
-//let commonWordsDictionnary = JSON.parse(localStorage.getItem('raw-extract-common-words')) || []
+let commonWordsDictionnary = commonWordsDictionnary() || []
 let separator = '===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = extractPageText()
