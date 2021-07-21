@@ -357,19 +357,22 @@ function mutateHtmlTextsOpacity() {
     rawArticle += '------------- \n\n';
 
     let outputText = ''
-    let parags = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,acronym,abbr,abbr,address,b,bdi,bdo,big,blockquote,center,cite,code,del,dfn,em,font,i,ins,kbd,mark,meter,pre,progress,q,rp,rt,ruby,s,samp,small,strike,del,s,strong,sub,sup,template,time,tt,u,var,wbr,label,a,link,nav,li,dt,dd,td,caption,span'))
-    parags.forEach(prg => {
+    let elms = Array.from(document.querySelectorAll('a,b,blockquote,button,dd,del,div,dt,em,footer,form,h1,h2,h3,h4,h5,h6,i,ins,label,li,mark,p,pre,script,section,small,span,strong,sub,sup,td,th'))
+    elms.forEach(prg => {
         let words = prg.innerText.split(/\s/g)
             .map(x => {
                 if (commonWordsDictionnary.includes(x.toLowerCase()) == true) {
-                    return '<span data-trigger="orasyo" style="opacity:0.44;">' + x.trim() + '</span>'
+                    return '<span data-trigger="orasyo-low" style="opacity:0.44;">' + x.trim() + '</span>'
                 } else {
-                    outputText += x + '\n';
-                    return x
+                    return '<span data-trigger="orasyo-high">' + x + '</span>'
                 }
             })
-            .join(' ')
-        prg.innerHTML = words
+
+        prg.innerHTML = words.join(' ')
+        outputText += Array.from(prg.children)
+            .filter(x => x.dataset.trigger == 'orasyo-high')
+            .map(x => x.innerText)
+            .join(' \n');
     })
 
     rawArticle += outputText
