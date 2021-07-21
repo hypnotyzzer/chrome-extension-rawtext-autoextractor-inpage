@@ -252,7 +252,7 @@ function getWordsOccurencesReportHTML() {
 <thead>
   <tr>
     <th class="tg-n5dg" colspan="3" width="40%">STRONG WORDS</th>
-    <th class="tg-xhg5" width="20%"></th>
+    <th class="tg-xhg5" width="20%">COUNT_ROWS_ITEMS</th>
     <th class="tg-igmv" colspan="3" width="40%">COMMON WORDS</th>
   </tr>
 </thead>
@@ -266,7 +266,7 @@ function getWordsOccurencesReportHTML() {
     <td class="tg-igmv">Word</td>
     <td class="tg-igmv">Occurences</td>
   </tr>
-  {{ROW}}
+  {{ROWS_ITEMS}}
 </tbody>
 </table>`
 
@@ -285,7 +285,8 @@ function getWordsOccurencesReportHTML() {
     let strongWords = occurencesReport.filter(x => commonWordsDictionnary.includes(x.text) == false)
     let commonWords = occurencesReport.filter(x => commonWordsDictionnary.includes(x.text) == true)
     let htmlRowsAsText = ''
-    for (let i = 0; i < Math.max(commonWords.length, strongWords.length); i++) {
+    let count = Math.max(commonWords.length, strongWords.length)
+    for (let i = 0; i < count; i++) {
         const commonWord = commonWords[i] || { text: '', occurences: '' };
         const strongWord = strongWords[i] || { text: '', occurences: '' };
         let newRow = emptyTableRow
@@ -295,7 +296,7 @@ function getWordsOccurencesReportHTML() {
         htmlRowsAsText += newRow + '\n'
     }
 
-    tableHtml = tableHtml.replace('{{ROW}}', htmlRowsAsText)
+    tableHtml = tableHtml.replace('{{ROWS_ITEMS}}', htmlRowsAsText).replace('COUNT_ROWS_ITEMS', count)
 
     // inject HTML
     let div = document.createElement('DIV')
@@ -353,13 +354,13 @@ function getWordsOccurencesReportHTML() {
  * Opacity of common words are lowered
  */
 function mutateHtmlTextsOpacity() {
-    rawArticle += 'STRONG WORDS SENTENCES (filter by common words dictionary)' + ' : \n\n';
-    rawArticle += '------------- \n\n';
+    // rawArticle += 'STRONG WORDS SENTENCES (filter by common words dictionary)' + ' : \n\n';
+    // rawArticle += '------------- \n\n';
 
     let outputText = ''
     let elms = Array.from(document.querySelectorAll('a,b,blockquote,button,dd,del,dt,em,h1,h2,h3,h4,h5,h6,i,ins,label,li,mark,p,small,span,strong,sub,sup,td,th'))
-    elms.forEach(prg => {
-        let words = prg.innerText.split(/\s/g)
+    elms.forEach(elm => {
+        let words = elm.innerText.split(/\s/g)
             .map(x => {
                 if (commonWordsDictionnary.includes(x.toLowerCase()) == true) {
                     return '<span data-trigger="orasyo-low" style="opacity:0.44;">' + x.trim() + '</span>'
@@ -368,17 +369,24 @@ function mutateHtmlTextsOpacity() {
                 }
             })
 
-        prg.innerHTML = words.join(' ')
-        outputText += Array.from(prg.children)
-            .filter(x => x.dataset.trigger == 'orasyo-high')
-            .map(x => x.innerText)
-            .join(' ') + '\n';
+        elm.innerHTML = words.join(' ')
+
+        // write in "pre"
+        // outputText += Array.from(elm.children)
+        //     .filter(x => x.dataset.trigger == 'orasyo-high')
+        //     .map(x => x.innerText)
+        //     .reduce((acc, val) => {
+        //         if (acc.includes(val))
+        //             acc.push(val)
+        //         return acc
+        //     }, [])
+        //     .join(' ') + '\n';
     })
 
-    rawArticle += outputText
+    // rawArticle += outputText
 
-    // always display results in console
-    rawArticle += '\n\n' + separator + '\n\n';
+    // // always display results in console
+    // rawArticle += '\n\n' + separator + '\n\n';
 }
 
 
