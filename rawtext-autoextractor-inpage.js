@@ -403,7 +403,7 @@ function injectButtonInHTML() {
             extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
             extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
             extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
-            getWordsOccurencesReport()
+            // getWordsOccurencesReport()
             console.log(rawArticle);
 
             injectPreInHTML()
