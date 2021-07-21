@@ -235,7 +235,7 @@ function getWordsOccurencesReportHTML() {
 
     let tableHtml = `
 <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;width:50%;margin:auto;}
+.tg  {border-collapse:collapse;border-spacing:0;width:50%;margin:auto;padding:1.2rem;}
 .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
   overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
@@ -312,7 +312,7 @@ function getWordsOccurencesReportHTML() {
                 commonWordsDictionnary.push(e.currentTarget.dataset.text)
             } else if (e.currentTarget.dataset.action == "remove") {
                 // remove the word from the "common list"
-                commonWordsDictionnary.filter(x => x != e.currentTarget.dataset.text)
+                commonWordsDictionnary = commonWordsDictionnary.filter(x => x != e.currentTarget.dataset.text)
             }
             // save localeStorage
             localStorage.setItem('raw-extract-common-words', JSON.stringify(commonWordsDictionnary))
