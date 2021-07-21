@@ -1,4 +1,4 @@
-let dico_fr = [
+let specialChars = [
     "1",
     "2",
     "3",
@@ -67,9 +67,14 @@ let dico_fr = [
     "/",
     "?",
     "~",
+    "«",
+    "»",
     "…",
     "/s",
-    "&",
+    "&"
+]
+
+let dico_fr = [
     "à cause de",
     "à cause que",
     "à cause",
@@ -734,77 +739,6 @@ let dico_fr = [
     "zéro"
 ]
 let dico_en = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-    "`",
-    "!",
-    "@",
-    "#",
-    "$",
-    "%",
-    "^",
-    "&",
-    "*",
-    "(",
-    ",",
-    ")",
-    "_",
-    "+",
-    "\\",
-    "-",
-    "=",
-    "[",
-    "]",
-    "{",
-    "}",
-    ";",
-    "'",
-    ":",
-    "\"",
-    "|",
-    ".",
-    "<",
-    ">",
-    "/",
-    "?",
-    "~",
-    "…",
-    "/s",
-    "&",
     "a bunch of",
     "a couple of",
     "a lot of",
@@ -1333,9 +1267,9 @@ let dico_en = [
 let getDictionnary = () => {
     switch (document.documentElement.lang) {
         case 'fr':
-            return dico_fr
+            return specialChars.concat(dico_fr)
         case 'en':
-            return dico_en
+            return specialChars.concat(dico_en)
         default:
             return []
     }
