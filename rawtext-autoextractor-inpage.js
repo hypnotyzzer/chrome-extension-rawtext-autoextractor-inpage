@@ -163,7 +163,7 @@ function getWordsOccurencesReport() {
 
 
     let formattedReport = occurencesReport
-        .filter(x => !blacklist.includes(x))
+        .filter(x => blacklist.includes(x) == false)
         .map((x, i) => {
             let rank = (i + 1).toString().padStart(4, '0')
             let spaces = new Array(Math.abs(33 - x.text.length)).join(' ')
