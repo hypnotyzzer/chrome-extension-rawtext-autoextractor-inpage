@@ -291,7 +291,7 @@ function getWordsOccurencesReportHTML() {
         const strongWord = strongWords[i] || { text: '', occurences: '' };
         let newRow = emptyTableRow
             .replace(/ROW_1/g, strongWord.text).replace(/ROW_2/g, strongWord.occurences)
-            .replace(/ROW_3/g, i)
+            .replace(/ROW_3/g, i + 1)
             .replace(/ROW_4/g, commonWord.text).replace(/ROW_5/g, commonWord.occurences)
         htmlRowsAsText += newRow + '\n'
     }
