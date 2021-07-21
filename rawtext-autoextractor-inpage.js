@@ -83,7 +83,8 @@ function extractTextFromMainBody() {
                 type: x.tagName,
                 text: x.innerText.trim(),
             }
-        });
+        })
+        .filter(x => x.length > 0)
 
     rawArticle += htmlTexts.map(x => {
         let t = x.type == 'P' ? x.text : titleToSymbol(x.type, x.text, '#').text
@@ -209,6 +210,93 @@ function getWordsOccurencesReport() {
     console.table(occurencesReport)
 }
 
+function getWordsOccurencesReportHTML() {
+
+    let blacklist = 'je|tu|il|nous|vous|ils|on|à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une|mais|où|et|donc|or|ni|car|mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes|à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers'
+    let text = htmlTextsFromPage.toLowerCase()
+    let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
+    let occurencesReport = allWords
+        .filter(x => x.length > 0)
+        .reduce((acc, val) => {
+            if (!acc.includes(val)) {
+                acc.push(val)
+            }
+            return acc
+        }, [])
+        .map(x => {
+            let occurences = allWords.filter(y => y == x).length
+            return {
+                text: x,
+                strongWord
+            }
+        })
+        .sort((a, b) => b.occurences - a.occurences)
+
+    let tableHtml = `
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-symt{background-color:#000000;border-color:inherit;color:#000000;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax" colspan="2">STRONG WORDS</th>
+    <th class="tg-0lax"></th>
+    <th class="tg-0lax" colspan="2">COMMON WORDS</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">Word</td>
+    <td class="tg-0pky">Occurences</td>
+    <td class="tg-symt"><span style="color:#FFF">Rank</span></td>
+    <td class="tg-0pky">Word</td>
+    <td class="tg-0pky">Occurences</td>
+  </tr>
+  {{ROW}}
+</tbody>
+</table>`
+
+    let emptyTableRow = `
+<tr>
+    <td class="tg-0lax">ROW_1</td>
+    <td class="tg-0lax">ROW_2</td>
+    <td class="tg-0lax">ROW_3</td>
+    <td class="tg-0lax">ROW_4</td>
+    <td class="tg-0lax">ROW_5</td>
+</tr>`
+
+
+    let commonWords = JSON.parse(localStorage.getItem('raw-extract-common-words')) || []
+    let strongWords = occurencesReport.filter(x => commonWords.includes(x.text) == false)
+    let htmlRowsAsText = ''
+    for (let i = 0; i < Math.max(commonWords.length, strongWords.length); i++) {
+        const commonWord = commonWords[i] || { text: '', occurences: '' };
+        const strongWord = strongWords[i] || { text: '', occurences: '' };
+        let newRow = emptyTableRow
+            .replace('ROW_1', commonWord.text).replace('ROW_2', commonWord.occurences)
+            .replace('ROW_3', i)
+            .replace('ROW_4', strongWord.text).replace('ROW_5', strongWord.occurences)
+        htmlRowsAsText += newRow + '\n'
+    }
+
+    tableHtml = tableHtml.replace('{{ROW}}', htmlRowsAsText)
+
+    // inject HTML
+    let div = document.createElement('DIV')
+    div.id = 'getWordsOccurencesReportHTML'
+    div.innerHTML = tableHtml
+    document.body.appendChild(div)
+
+    console.table(occurencesReport)
+}
+
 
 /**
  * Insert destructured data into HTML page with a "pre" tag.
@@ -265,6 +353,7 @@ function injectButtonInHTML() {
             extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
             extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
             getWordsOccurencesReport()
+            getWordsOccurencesReportHTML()
             console.log(rawArticle);
 
             injectPreInHTML()
