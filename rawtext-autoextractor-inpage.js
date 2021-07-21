@@ -348,6 +348,27 @@ function getWordsOccurencesReportHTML() {
 }
 
 
+/**
+ * Useful for easier & faster reading of the native html content
+ * Opacity of common words are lowered
+ */
+function mutateHtmlTextsOpacity() {
+    let parags = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
+    let dico = ['le', 'les', 'la', 'et']
+
+    parags.forEach(prg => {
+        let words = prg.innerText.split(/\s/g)
+            .map(x => {
+                if (dico.includes(x.toLowerCase()) == true) {
+                    return '<span style="opacity:0.44;">' + x.trim() + '</span>'
+                } else
+                    return x
+            })
+            .join(' ')
+        prg.innerHTML = words
+    })
+}
+
 
 /**
  * Insert destructured data into HTML page with a "pre" tag.
@@ -404,6 +425,7 @@ function injectButtonInHTML() {
             extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
             extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
             // getWordsOccurencesReport()
+            mutateHtmlTextsOpacity()
             console.log(rawArticle);
 
             injectPreInHTML()
