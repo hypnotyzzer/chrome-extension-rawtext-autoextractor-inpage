@@ -85,6 +85,8 @@ function extractTextFromMainBody() {
             }
         });
 
+    rawArticle += htmlTexts.map(x => x.text).join('\n\n')
+
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
 
