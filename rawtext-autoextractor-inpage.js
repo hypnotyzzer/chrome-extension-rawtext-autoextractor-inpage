@@ -353,18 +353,29 @@ function getWordsOccurencesReportHTML() {
  * Opacity of common words are lowered
  */
 function mutateHtmlTextsOpacity() {
+    rawArticle += 'STRONG WORDS SENTENCES (filter by common words dictionary)' + ' : \n\n';
+    rawArticle += '------------- \n\n';
+
+    let outputText = ''
     let parags = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,acronym,abbr,abbr,address,b,bdi,bdo,big,blockquote,center,cite,code,del,dfn,em,font,i,ins,kbd,mark,meter,pre,progress,q,rp,rt,ruby,s,samp,small,strike,del,s,strong,sub,sup,template,time,tt,u,var,wbr,label,a,link,nav,li,dt,dd,td,caption,span'))
     parags.forEach(prg => {
         let words = prg.innerText.split(/\s/g)
             .map(x => {
                 if (commonWordsDictionnary.includes(x.toLowerCase()) == true) {
                     return '<span data-trigger="orasyo" style="opacity:0.44;">' + x.trim() + '</span>'
-                } else
+                } else {
+                    outputText += x + '\n';
                     return x
+                }
             })
             .join(' ')
         prg.innerHTML = words
     })
+
+    rawArticle += outputText
+
+    // always display results in console
+    rawArticle += '\n\n' + separator + '\n\n';
 }
 
 
