@@ -243,7 +243,7 @@ function getWordsOccurencesReportHTML() {
   font-family:"Lucida Console", Monaco, monospace !important;;text-align:center;vertical-align:top}
 .tg .tg-n5dg{background-color:#ffccc9;border-color:inherit;font-family:"Lucida Console", Monaco, monospace !important;;
   text-align:center;vertical-align:top}
-.tg .tg-igmv{background-color:#96fffb;border-color:inherit;font-family:"Lucida Console", Monaco, monospace !important;;
+.tg .tg-igmv{background-color:#e2e2e2;border-color:inherit;font-family:"Lucida Console", Monaco, monospace !important;;
   text-align:center;vertical-align:top}
 .tg .tg-xhg5{border-color:inherit;font-family:"Lucida Console", Monaco, monospace !important;;text-align:center;vertical-align:top}
 .tg .tg-5nj1{border-color:inherit;font-family:"Lucida Console", Monaco, monospace !important;;text-align:left;vertical-align:top}
@@ -257,7 +257,7 @@ function getWordsOccurencesReportHTML() {
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <tr style="border-bottom: 7px solid black;">
     <td class="tg-n5dg">Word</td>
     <td class="tg-n5dg">Occurences</td>
     <td class="tg-n5dg">Action</td>
