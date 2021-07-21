@@ -1,5 +1,5 @@
 //console.clear();
-let commonWordsDictionnary = JSON.parse(localStorage.getItem('raw-extract-common-words')) || []
+//let commonWordsDictionnary = JSON.parse(localStorage.getItem('raw-extract-common-words')) || []
 let separator = '===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = extractPageText()
@@ -313,7 +313,7 @@ function getWordsOccurencesReportHTML() {
                 commonWordsDictionnary = commonWordsDictionnary.filter(x => x != e.currentTarget.dataset.text)
             }
             // save localeStorage
-            localStorage.setItem('raw-extract-common-words', JSON.stringify(commonWordsDictionnary))
+            console.log('✅ for GITHUB => save NEW commonWordsDictionnary', JSON.stringify(commonWordsDictionnary))
             // remove table to refresh it
             var element = document.getElementById("words-occurences-report-html");
             element.parentNode.removeChild(element);
