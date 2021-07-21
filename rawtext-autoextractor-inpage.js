@@ -357,7 +357,7 @@ function mutateHtmlTextsOpacity() {
     rawArticle += '------------- \n\n';
 
     let outputText = ''
-    let elms = Array.from(document.querySelectorAll('a,b,blockquote,button,dd,del,div,dt,em,footer,form,h1,h2,h3,h4,h5,h6,i,ins,label,li,mark,p,pre,script,section,small,span,strong,sub,sup,td,th'))
+    let elms = Array.from(document.querySelectorAll('a,b,blockquote,button,dd,del,dt,em,footer,form,h1,h2,h3,h4,h5,h6,i,ins,label,li,mark,p,pre,script,section,small,span,strong,sub,sup,td,th'))
     elms.forEach(prg => {
         let words = prg.innerText.split(/\s/g)
             .map(x => {
