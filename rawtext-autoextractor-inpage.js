@@ -3,6 +3,21 @@ let separator = '===============================================================
 let rawArticle = '';
 let htmlTextsFromPage = extractPageText()
 
+// function findHighestElementArea(htmlElement) {
+//     let elm = Array.from(htmlElement)
+//         //.filter(x=>x.tagName != 'SCRIPT')
+//         //.map(x=>x.getBoundingClientRect().width * x.getBoundingClientRect().height).sort((a,b)=>b-a)
+//         .reduce((max, elm) => {
+//             let area1 = elm.getBoundingClientRect().width * elm.getBoundingClientRect().height
+//             let area2 = max ? max.getBoundingClientRect().width * max.getBoundingClientRect().height : 0
+//             let highest = area1 > area2 ? elm : area1 < area2 ? max : elm
+//             max = highest
+//             return max
+//         }, null)
+//     findHighestElementArea(elm)
+//     return elm
+// }
+
 function extractPageText() {
     // html texts in page
     return Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
@@ -58,7 +73,7 @@ function extractAllTitles() {
  * Extraction of all readeable content within the page.
  */
 function extractTextFromMainBody() {
-    rawArticle += 'MAIN CONTENT : \n\n';
+    rawArticle += 'MAIN CONTENT (RAW) : \n\n';
     rawArticle += '------------- \n\n';
 
     // html texts in page
@@ -69,6 +84,12 @@ function extractTextFromMainBody() {
                 text: x.innerText.trim(),
             }
         });
+
+    // always display results in console
+    rawArticle += '\n\n' + separator + '\n\n';
+
+    rawArticle += 'MAIN CONTENT (SPLIT) : \n\n';
+    rawArticle += '------------- \n\n';
 
     htmlTexts.forEach(line => {
         if (line.type == 'P') {
