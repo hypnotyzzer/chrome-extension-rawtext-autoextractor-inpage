@@ -1194,7 +1194,7 @@ let dico_en = [
     "zero"
 ]
 
-let commonWordsDictionnary = () => {
+let getDictionnary = () => {
     switch (document.documentElement.lang) {
         case 'fr':
             return dico_fr

@@ -1,5 +1,5 @@
 //console.clear();
-let commonWordsDictionnary = commonWordsDictionnary() || []
+let commonWordsDictionnary = getDictionnary() || []
 let separator = '===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = extractPageText()
