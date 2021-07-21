@@ -213,7 +213,6 @@ function getWordsOccurencesReport() {
 
 function getWordsOccurencesReportHTML() {
 
-    let blacklist = 'je|tu|il|nous|vous|ils|on|à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une|mais|où|et|donc|or|ni|car|mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes|à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers'
     let text = htmlTextsFromPage.toLowerCase()
     let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
     let occurencesReport = allWords
@@ -306,7 +305,6 @@ function getWordsOccurencesReportHTML() {
     let btns = document.querySelectorAll('.btn-words')
     btns.forEach(elm => {
         elm.addEventListener('click', (e) => {
-            debugger
             if (e.currentTarget.dataset.action == "add") {
                 // add the word to the "common list"
                 commonWordsDictionnary.push(e.currentTarget.dataset.text)
