@@ -372,7 +372,7 @@ function mutateHtmlTextsOpacity() {
         outputText += Array.from(prg.children)
             .filter(x => x.dataset.trigger == 'orasyo-high')
             .map(x => x.innerText)
-            .join(' ');
+            .join(' ') + '\n';
     })
 
     rawArticle += outputText
