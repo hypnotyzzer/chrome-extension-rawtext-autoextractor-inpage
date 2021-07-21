@@ -1,5 +1,5 @@
 //console.clear();
-let commonWords = JSON.parse(localStorage.getItem('raw-extract-common-words')) || []
+let commonWordsDictionnary = JSON.parse(localStorage.getItem('raw-extract-common-words')) || []
 let separator = '===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = extractPageText()
@@ -283,7 +283,8 @@ function getWordsOccurencesReportHTML() {
 </tr>`
 
     // inject full table with data
-    let strongWords = occurencesReport.filter(x => commonWords.includes(x.text) == false)
+    let strongWords = occurencesReport.filter(x => commonWordsDictionnary.includes(x.text) == false)
+    let commonWords = occurencesReport.filter(x => commonWordsDictionnary.includes(x.text) == true)
     let htmlRowsAsText = ''
     for (let i = 0; i < Math.max(commonWords.length, strongWords.length); i++) {
         const commonWord = commonWords[i] || { text: '', occurences: '' };
@@ -308,11 +309,13 @@ function getWordsOccurencesReportHTML() {
             debugger
             if (e.currentTarget.dataset.action == "add") {
                 // add the word to the "common list"
-                commonWords.push({ text: e.currentTarget.dataset.text, occurences: e.currentTarget.dataset.occurences })
+                commonWordsDictionnary.push(e.currentTarget.dataset.text)
             } else if (e.currentTarget.dataset.action == "remove") {
                 // remove the word from the "common list"
-                commonWords.filter(x => x.text != e.currentTarget.dataset.text)
+                commonWordsDictionnary.filter(x => x != e.currentTarget.dataset.text)
             }
+            // save localeStorage
+            localStorage.setItem('raw-extract-common-words', JSON.stringify(commonWordsDictionnary))
             // remove table to refresh it
             var element = document.getElementById("words-occurences-report-html");
             element.parentNode.removeChild(element);
