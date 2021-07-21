@@ -258,7 +258,7 @@ function getWordsOccurencesReportHTML() {
 </thead>
 <tbody>
   <tr style="border-bottom: 7px solid black;">
-    <td class="tg-n5dg">Word</td>
+    <td class="tg-n5dg">Word <button id="copy-all-words">Copy all</button></td>
     <td class="tg-n5dg">Occurences</td>
     <td class="tg-n5dg">Action</td>
     <td class="tg-10ea"><span style="color:#FFF">Rank</span></td>
@@ -302,6 +302,8 @@ function getWordsOccurencesReportHTML() {
     div.id = 'getWordsOccurencesReportHTML'
     div.innerHTML = tableHtml
     document.body.appendChild(div)
+
+    // btns to move words in table
     let btns = document.querySelectorAll('.btn-words')
     btns.forEach(elm => {
         elm.addEventListener('click', (e) => {
@@ -320,11 +322,31 @@ function getWordsOccurencesReportHTML() {
             // call refresh
             getWordsOccurencesReportHTML()
         })
-
     });
+
+    // btn for copy all to clipboard
+    let btnCopyAll = document.querySelector('#copy-all-words')
+    btnCopyAll.addEventListener('click', (e) => {
+        let allWords = Array.from(document.querySelectorAll("#words-occurences-report-html > tbody > tr:not(:first-child) > td:nth-child(1)"))
+            .map(x => x.innerText)
+            .join('\n')
+        let txtarea = document.createElement('TEXTAREA')
+        document.body.appendChild(txtarea)
+        txtarea.value = allWords
+        txtarea.style.bottom = 0
+        txtarea.style.left = '999px'
+        txtarea.select();
+        txtarea.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+        document.body.removeChild(txtarea)
+        console.log('💌 All words are in the clipboard !')
+    })
 
     console.table(occurencesReport)
 }
+
 
 
 /**
