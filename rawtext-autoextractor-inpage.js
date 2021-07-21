@@ -85,7 +85,14 @@ function extractTextFromMainBody() {
             }
         });
 
-    rawArticle += htmlTexts.map(x => x.text).join('\n\n').replace(/:|\.{1,}|;{1,}|\?{1,}|!{1,}|\)|\]|\}/gmi, x => x + '\n')
+    rawArticle += htmlTexts.map(x => {
+        let t = x.type == 'P' ? x.text : titleToSymbol(x.type, x.text, '#').text
+        return t
+    })
+        .join('\n\n')
+        .replace(/:|\.{1,}|;{1,}|\?{1,}|!{1,}|\)|\]|\}/gmi, x => x + '\n')
+        .replace(/\r{2,}|\n{2,}/gmi, x => x + '\n\n')
+
 
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
