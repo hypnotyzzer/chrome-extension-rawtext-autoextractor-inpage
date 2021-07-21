@@ -85,7 +85,7 @@ function extractTextFromMainBody() {
             }
         });
 
-    rawArticle += htmlTexts.map(x => x.text).join('\n\n')
+    rawArticle += htmlTexts.map(x => x.text).join('\n\n').replace(/:|\.{1,}|;{1,}|\?{1,}|!{1,}|\)|\]|\}/gmi, x => x + '\n')
 
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
