@@ -354,13 +354,11 @@ function getWordsOccurencesReportHTML() {
  */
 function mutateHtmlTextsOpacity() {
     let parags = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
-    let dico = ['le', 'les', 'la', 'et']
-
     parags.forEach(prg => {
         let words = prg.innerText.split(/\s/g)
             .map(x => {
-                if (dico.includes(x.toLowerCase()) == true) {
-                    return '<span style="opacity:0.44;">' + x.trim() + '</span>'
+                if (commonWordsDictionnary.includes(x.toLowerCase()) == true) {
+                    return '<span data-trigger="orasyo" style="opacity:0.44;">' + x.trim() + '</span>'
                 } else
                     return x
             })
