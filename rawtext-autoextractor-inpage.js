@@ -353,7 +353,7 @@ function getWordsOccurencesReportHTML() {
  * Opacity of common words are lowered
  */
 function mutateHtmlTextsOpacity() {
-    let parags = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
+    let parags = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,acronym,abbr,abbr,address,b,bdi,bdo,big,blockquote,center,cite,code,del,dfn,em,font,i,ins,kbd,mark,meter,pre,progress,q,rp,rt,ruby,s,samp,small,strike,del,s,strong,sub,sup,template,time,tt,u,var,wbr,label,a,link,nav,li,dt,dd,td,caption,span'))
     parags.forEach(prg => {
         let words = prg.innerText.split(/\s/g)
             .map(x => {

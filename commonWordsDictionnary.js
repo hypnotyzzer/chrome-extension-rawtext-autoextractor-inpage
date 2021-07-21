@@ -521,6 +521,7 @@ let dico_fr = [
     "qq",
     "qu'",
     "qu",
+    "qu'y",
     "quand bien même",
     "quand je pense",
     "quand on pense",
