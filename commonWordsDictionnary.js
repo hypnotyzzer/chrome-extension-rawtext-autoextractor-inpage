@@ -1313,7 +1313,8 @@ let dico_en = [
 ]
 
 let getDictionnary = () => {
-    switch (document.documentElement.lang) {
+    console.log('Detected language for common words dictionnary : ', document.documentElement.lang)
+    switch (document.documentElement.lang.substring(0, 2)) {
         case 'fr':
             return specialChars.concat(dico_fr)
         case 'en':
