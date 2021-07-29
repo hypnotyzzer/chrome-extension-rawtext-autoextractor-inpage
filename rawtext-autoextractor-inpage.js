@@ -1,6 +1,6 @@
 //console.clear();
 let commonWordsDictionnary = ''
-let separator = '===================================================================================\n===================================================================================\n===================================================================================';
+let separator = '===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = ''
 
@@ -19,10 +19,12 @@ let htmlTextsFromPage = ''
 //     return elm
 // }
 
+
 function setCommonWordsDictionnary() {
     // set Common Words Dictionnary
     return commonWordsDictionnary = getDictionnary() || []
 }
+
 
 function extractPageText() {
     // html texts in page
@@ -31,13 +33,15 @@ function extractPageText() {
         .join('\n')
 }
 
+
 function insertHeader() {
     rawArticle = '\n\nRAWTEXT-AUTOEXTRACTOR-INPAGE => INJECTED FROM CJS CHROME EXTENSION'
-        + '\n\n' + 'Code location : C:\Users\hypno\Dropbox\Extension for Google Chrome\RawText-Autoextractor-InPage\rawtext-autoextractor-inpage.js'
+        + '\n\n' + 'Code location : C:/Users/hypno/Dropbox/Extension for Google Chrome/RawText-Autoextractor-InPage/rawtext-autoextractor-inpage.js'
         + '\n\n' + separator + '\n\n'
         + 'URL : ' + window.location
         + '\n\n' + separator + '\n\n';
 }
+
 
 /**
  *
@@ -57,11 +61,14 @@ function titleToSymbol(tagName, innerText, charSuite) {
     }
 }
 
+
 /**
  * Extraction of all titles within the page.
  *
  */
 function extractAllTitles() {
+    insertHeader()
+
     rawArticle += 'TITLES : \n\n';
     rawArticle += '-------- \n\n';
 
@@ -73,13 +80,17 @@ function extractAllTitles() {
 
     // add separator after titles list
     rawArticle += '\n' + separator + '\n\n';
+    console.log(rawArticle);
+
+    injectPreInHTML(rawArticle, 'red')
 }
+
 
 /**
  * Extraction of all readeable content within the page.
  */
 function extractTextFromMainBody() {
-    rawArticle += 'MAIN CONTENT (RAW) : \n\n';
+    rawArticle = 'MAIN CONTENT (RAW) : \n\n';
     rawArticle += '------------- \n\n';
 
     // html texts in page
@@ -143,7 +154,11 @@ function extractTextFromMainBody() {
 
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
+    console.log(rawArticle);
+
+    injectPreInHTML(rawArticle, 'cyan')
 }
+
 
 /**
  * Extract portions of text that match regex formula
@@ -151,7 +166,7 @@ function extractTextFromMainBody() {
  * @param {string} regExFormula Example : "je|tu|il|nous|vous|ils|on"
  */
 function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|un|une") {
-    rawArticle += titleAsType + ' : \n\n';
+    rawArticle = titleAsType + ' : \n\n';
     rawArticle += '------------- \n\n';
 
     let tempText = ""
@@ -177,49 +192,54 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
 
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
+    console.log(rawArticle);
+
+    injectPreInHTML(rawArticle, 'orange')
 }
 
-function getWordsOccurencesReport() {
-    rawArticle += 'WORDS OCCURENCES REPORT' + ' : \n\n';
-    rawArticle += '------------- \n\n';
 
-    let blacklist = 'je|tu|il|nous|vous|ils|on|à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une|mais|où|et|donc|or|ni|car|mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes|à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers'
-    let text = htmlTextsFromPage.toLowerCase()
-    let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
-    let occurencesReport = allWords
-        .filter(x => x.length > 0)
-        .reduce((acc, val) => {
-            if (!acc.includes(val)) {
-                acc.push(val)
-            }
-            return acc
-        }, [])
-        .map(x => {
-            let occurences = allWords.filter(y => y == x).length
-            return {
-                text: x,
-                occurences
-            }
-        })
-        .sort((a, b) => b.occurences - a.occurences)
+// function getWordsOccurencesReport() {
+//     rawArticle += 'WORDS OCCURENCES REPORT' + ' : \n\n';
+//     rawArticle += '------------- \n\n';
+
+//     let blacklist = 'je|tu|il|nous|vous|ils|on|à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une|mais|où|et|donc|or|ni|car|mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes|à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers'
+//     let text = htmlTextsFromPage.toLowerCase()
+//     let allWords = text.match(/[^,;.:!?\(\)\[\]\{\}"'\r\n\s]*/gmi)
+//     let occurencesReport = allWords
+//         .filter(x => x.length > 0)
+//         .reduce((acc, val) => {
+//             if (!acc.includes(val)) {
+//                 acc.push(val)
+//             }
+//             return acc
+//         }, [])
+//         .map(x => {
+//             let occurences = allWords.filter(y => y == x).length
+//             return {
+//                 text: x,
+//                 occurences
+//             }
+//         })
+//         .sort((a, b) => b.occurences - a.occurences)
 
 
-    let formattedReport = occurencesReport
-        .filter(x => blacklist.includes(x) == false)
-        .map((x, i) => {
-            let rank = (i + 1).toString().padStart(4, '0')
-            let spaces = new Array(Math.abs(33 - x.text.length)).join(' ')
-            return `${rank} -\t ${x.text} ${spaces} ${x.occurences}`
-        })
-        .join('\n')
+//     let formattedReport = occurencesReport
+//         .filter(x => blacklist.includes(x) == false)
+//         .map((x, i) => {
+//             let rank = (i + 1).toString().padStart(4, '0')
+//             let spaces = new Array(Math.abs(33 - x.text.length)).join(' ')
+//             return `${rank} -\t ${x.text} ${spaces} ${x.occurences}`
+//         })
+//         .join('\n')
 
-    rawArticle += formattedReport
+//     rawArticle += formattedReport
 
-    // always display results in console
-    rawArticle += '\n\n' + separator + '\n\n';
+//     // always display results in console
+//     rawArticle += '\n\n' + separator + '\n\n';
 
-    console.table(occurencesReport)
-}
+//     console.table(occurencesReport)
+// }
+
 
 /**
  * Create and insert a table with all splitted words
@@ -403,11 +423,10 @@ function mutateHtmlTextsOpacity() {
 }
 
 
-
 /**
  * Insert destructured data into HTML page with a "pre" tag.
  */
-function injectPreInHTML() {
+function injectPreInHTML____old() {
     if (window) {
         // always remove element (refresh effect)
         let elm = document.querySelector('#orasyo-rawArticle')
@@ -428,6 +447,45 @@ function injectPreInHTML() {
         pre.style.zIndex = '99999';
         document.body.appendChild(pre)
         pre.scrollIntoView({ behavior: 'smooth' })
+    }
+}
+
+
+/**
+ * Insert destructured data into HTML page with a "pre" tag.
+ */
+function injectPreInHTML(text, borderColor) {
+    if (window) {
+        // insert PRE element
+        let pre = document.createElement("PRE")
+        pre.class = 'orasyo-content-report'
+        pre.innerText = text
+        pre.style.margin = '1.1rem';
+        pre.style.padding = '1.1rem';
+        pre.style.paddingTop = '3.1rem';
+        pre.style.paddingLeft = '3.1rem';
+        pre.style.paddingBottom = '3.1rem';
+        pre.style.backgroundColor = 'black';
+        pre.style.color = 'lightGray';
+        pre.style.borderLeftWidth = '13px';
+        pre.style.borderLeftStyle = 'solid';
+        pre.style.borderLeftColor = borderColor;
+        pre.style.fontFamily = '"Lucida Console", "Courier New", monospace';
+        pre.style.zIndex = '99999';
+        document.body.appendChild(pre)
+        pre.scrollIntoView({ behavior: 'smooth' })
+    }
+}
+
+
+/**
+ * Insert destructured data into HTML page with a "pre" tag.
+ */
+function removePreFromHTML() {
+    if (window) {
+        // always remove element (refresh effect)
+        let elm = document.querySelector('.orasyo-content-report')
+        if (elm) elm.remove()
     }
 }
 
@@ -457,8 +515,9 @@ function injectButtonInHTML() {
             }
             btn.onclick = () => {
                 setCommonWordsDictionnary()
+                removePreFromHTML()
                 extractPageText()
-                insertHeader()
+                // inject pre's in page
                 extractAllTitles()
                 extractTextFromMainBody()
                 extractTextPortion("PRONOMS", 'je|tu|il|nous|vous|ils|on')
@@ -467,10 +526,10 @@ function injectButtonInHTML() {
                 extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
                 extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
                 // getWordsOccurencesReport()
-                mutateHtmlTextsOpacity()
-                console.log(rawArticle);
 
-                injectPreInHTML()
+                mutateHtmlTextsOpacity()
+
+                // injectPreInHTML()
                 getWordsOccurencesReportHTML()
             }
             document.body.appendChild(btn)
