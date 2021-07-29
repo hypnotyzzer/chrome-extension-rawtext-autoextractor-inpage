@@ -96,9 +96,9 @@ function extractTextFromMainBody() {
         let t = x.type == 'P' ? x.text : titleToSymbol(x.type, x.text, '#').text
         return t
     })
-        .join('\n\n')
+        .join('\n')
         .replace(/:|\.{1,}|;{1,}|\?{1,}|!{1,}|\)|\]|\}/gmi, x => x + '\n')
-        .replace(/\r{2,}|\n{2,}/gmi, x => x + '\n\n')
+        .replace(/[^\n\r]+/gmi, x => x + '\n')
 
 
     // always display results in console
