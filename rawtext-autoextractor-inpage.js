@@ -3,6 +3,27 @@ let commonWordsDictionnary = ''
 let separator = '===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = ''
+let language = ''
+const PRONOUNS = {
+    fr: 'je|tu|il|nous|vous|ils|on',
+    en: 'I|you|he|we|you|they|we',
+}
+const ARTICLES = {
+    fr: 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une',
+    en: 'to|from|the|a',
+}
+const COORDINATING_CONJUNCTIONS = {
+    fr: 'mais|où|et|donc|or|ni|car',
+    en: 'but|or|and|so|however|neither|because|for|nor|yet',
+}
+const POSSESIVE = {
+    fr: 'mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes',
+    en: 'my|your|his|its|our|their|mine|hold|yours',
+}
+const PREPOSITIONS = {
+    fr: 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers',
+    en: 'yours|after|to|before|with|your house|against|in|of|from|behind|in front of|in|between|towards|up to|despite|by|during|for|without|unless|under|on|towards',
+}
 
 // function findHighestElementArea(htmlElement) {
 //     let elm = Array.from(htmlElement)
@@ -22,6 +43,7 @@ let htmlTextsFromPage = ''
 
 function setCommonWordsDictionnary() {
     // set Common Words Dictionnary
+    language = document.documentElement.lang.substring(0, 2)
     return commonWordsDictionnary = getDictionnary() || []
 }
 
@@ -128,32 +150,21 @@ function extractTextFromMainBody() {
     //
     // print text as splitted lines according to "ponctuation" or "special words"
     //
-    switch (document.documentElement.lang.substring(0, 2)) {
-        case 'fr':
-            debugger
-            rawArticle += htmlTexts
-                .join('\n')
-                .replace(/(.+?[,:.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
-                .replace(/(\b(je|tu|il|nous|vous|ils|on)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(mais|où|et|donc|or|ni|car)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-            break
-        case 'en':
-            debugger
-            rawArticle += htmlTexts
-                .join('\n')
-                .replace(/(.+?[,:.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
-                .replace(/(\b(I|you|he|we|you|they|we)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(to|from|the|a)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(but|or|and|so|however|neither|because|for|nor|yet)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(my|your|his|its|our|their|mine|hold|yours)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-                .replace(/(\b(yours|after|to|before|with|your house|against|in|of|from|behind|in front of|in|between|towards|up to|despite|by|during|for|without|unless|under|on|towards)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
-            break
-        default:
-            break
-    }
+    /**
+     * PRONOUNS
+     * ARTICLES
+     * COORDINATING_CONJUNCTIONS
+     * POSSESIVE
+     * PREPOSITIONS
+     */
+    rawArticle += htmlTexts
+        .join('\n')
+        .replace(/(.+?[,:.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
+        .replace(new RegExp(`(\\b(${PRONOUNS[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
+        .replace(new RegExp(`(\\b(${ARTICLES[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
+        .replace(new RegExp(`(\\b(${COORDINATING_CONJUNCTIONS[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
+        .replace(new RegExp(`(\\b(${POSSESIVE[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
+        .replace(new RegExp(`(\\b(${PREPOSITIONS[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
 
     // always display results in console
     rawArticle += '\n\n';
@@ -496,11 +507,11 @@ function injectButtonInHTML() {
                 // inject pre's in page
                 extractAllTitles()
                 extractTextFromMainBody()
-                extractTextPortion("PRONOMS", 'je|tu|il|nous|vous|ils|on')
-                extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
-                extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
-                extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
-                extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
+                extractTextPortion("PRONOMS", PRONOUNS[language])
+                extractTextPortion("ARTICLES", ARTICLES[language])
+                extractTextPortion("COORDINATING CONJUNCTIONS", COORDINATING_CONJUNCTIONS[language])
+                extractTextPortion("POSSESIFS", POSSESIVE[language])
+                extractTextPortion("PREPOSITIONS", PREPOSITIONS[language])
                 // getWordsOccurencesReport()
 
                 mutateHtmlTextsOpacity()
