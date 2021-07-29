@@ -79,6 +79,7 @@ function extractAllTitles() {
         .forEach(x => rawArticle += '|' + x.type + '|' + x.text + '\n');
 
     // add separator after titles list
+    rawArticle += '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, 'mediumpurple')
@@ -89,7 +90,7 @@ function extractAllTitles() {
  * Extraction of all readeable content within the page.
  */
 function extractTextFromMainBody() {
-    rawArticle = '\n\n' + separator + '\n\n' + 'MAIN CONTENT (RAW) : \n\n';
+    rawArticle = separator + '\n\n' + 'MAIN CONTENT (RAW) : \n\n';
     rawArticle += '------------- \n\n';
 
     // html texts in page
@@ -113,6 +114,7 @@ function extractTextFromMainBody() {
     rawArticle += htmlTexts
         .join('\n')
         .replace(/(.+?[.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
+    rawArticle += '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, 'dodgerblue')
@@ -120,7 +122,7 @@ function extractTextFromMainBody() {
 
 
 
-    rawArticle = '\n\n' + separator + '\n\n' + 'MAIN CONTENT ( SPLIT ) : \n\n';
+    rawArticle = separator + '\n\n' + 'MAIN CONTENT ( SPLIT ) : \n\n';
     rawArticle += '------------- \n\n';
 
     //
@@ -154,6 +156,7 @@ function extractTextFromMainBody() {
     }
 
     // always display results in console
+    rawArticle += '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, 'lightpink')
@@ -166,7 +169,7 @@ function extractTextFromMainBody() {
  * @param {string} regExFormula Example : "je|tu|il|nous|vous|ils|on"
  */
 function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|un|une") {
-    rawArticle = '\n\n' + separator + '\n\n' + titleAsType + ' : \n\n';
+    rawArticle = separator + '\n\n' + titleAsType + ' : \n\n';
     rawArticle += '------------- \n\n';
 
     let tempText = ""
@@ -191,6 +194,7 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     rawArticle += tempText
 
     // always display results in console
+    rawArticle += '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
