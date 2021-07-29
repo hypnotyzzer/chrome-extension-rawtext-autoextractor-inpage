@@ -178,7 +178,7 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     regexs.forEach(regx => {
         // extraction of text portion
         const regex = new RegExp('(\\b)(' + regx + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
-        matchs = matchs.concat(htmlTextsFromPage.match(regex) || ['No data available.'])
+        matchs = matchs.concat(htmlTextsFromPage.match(regex) || ['<<< No data available. >>>'])
     });
     tempText = matchs
         .map(x => x.trim())
