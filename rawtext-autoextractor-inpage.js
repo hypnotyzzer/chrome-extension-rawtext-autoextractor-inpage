@@ -90,7 +90,7 @@ function extractTextFromMainBody() {
                 text: x.innerText.trim(),
             }
         })
-        .filter(x => x.length > 0)
+        .filter(x => x.text.length > 0)
 
     rawArticle += htmlTexts.map(x => {
         let t = x.type == 'P' ? x.text : titleToSymbol(x.type, x.text, '#').text
