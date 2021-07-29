@@ -1,6 +1,6 @@
 //console.clear();
 let commonWordsDictionnary = ''
-let separator = '===================================================================================';
+let separator = '===================================================================================\n===================================================================================\n===================================================================================';
 let rawArticle = '';
 let htmlTextsFromPage = ''
 
@@ -91,51 +91,56 @@ function extractTextFromMainBody() {
             }
         })
         .filter(x => x.text.length > 0)
+        .map(x => {
+            // detect titles and set title with markdown style (ex: h1=#, h2=##, h3=###, ...)
+            let t = x.type == 'P' ? x.text : '\n' + titleToSymbol(x.type, x.text, '#').text
+            return t
+        })
 
-    rawArticle += htmlTexts.map(x => {
-        let t = x.type == 'P' ? x.text : titleToSymbol(x.type, x.text, '#').text
-        return t
-    })
+    //
+    // print text as full lines
+    //
+    rawArticle += htmlTexts
         .join('\n')
-        .replace(/:|\.{1,}|;{1,}|\?{1,}|!{1,}|\)|\]|\}/gmi, x => x + '\n')
-        .replace(/[^\n\r]+/gmi, x => x + '\n')
-
-
-    // always display results in console
+        .replace(/(.+?[.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
     rawArticle += '\n\n' + separator + '\n\n';
 
-    rawArticle += 'MAIN CONTENT (SPLIT) : \n\n';
+
+
+
+    rawArticle += 'MAIN CONTENT ( SPLIT ) : \n\n';
     rawArticle += '------------- \n\n';
 
-    htmlTexts.forEach(line => {
-        if (line.type == 'P') {
-            let tempText = line.text
-            // insert splitter X2 after "linebreaks" OR "ponctuations" or "brackets"
-            tempText = tempText.replace(/\r|\n|:|\.{1,}|\?{1,}|!{1,}|\)|\]|\}/gmi, x => x + '<__SPLIT__> <__SPLIT__>')
-            // insert splitter X1 after "ponctuations"
-            tempText = tempText.replace(/,|;/gmi, x => x + '<__SPLIT__>')
-            // insert splitter before "brackets"
-            tempText = tempText.replace(/\(|\[|\{/gmi, x => '<__SPLIT__> <__SPLIT__>' + x)
-            // insert splitter before words as "pronouns"
-            tempText = tempText.replace(/(^\b|\s)(je|tu|il|nous|vous|ils|on)(\b)/gim, x => '<__SPLIT__>' + x)
-            // insert splitter before words as "articles"
-            tempText = tempText.replace(/(^\b|\s)(à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une)(\b)/gim, x => '<__SPLIT__>' + x)
-            // insert splitter before words as "Co-ordinating conjunction"
-            tempText = tempText.replace(/(^\b|\s)(mais|où|et|donc|or|ni|car)(\b)/gim, x => '<__SPLIT__>' + x)
-            // insert splitter before words as "possessive adjectives"
-            tempText = tempText.replace(/(^\b|\s)(mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes)(\b)/gim, x => '<__SPLIT__>' + x)
-            // insert splitter before words as "prepositions"
-            tempText = tempText.replace(/(^\b|\s)(à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers)(\b)/gim, x => '<__SPLIT__>' + x)
+    //
+    // print text as splitted lines according to "ponctuation" or "special words"
+    //
+    switch (document.documentElement.lang.substring(0, 2)) {
+        case 'fr':
+            debugger
+            rawArticle += htmlTexts
+                .join('\n')
+                .replace(/(.+?[,:.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
+                .replace(/(\b(je|tu|il|nous|vous|ils|on)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(mais|où|et|donc|or|ni|car)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(mon|ton|son|ma|ta|sa|mes|tes|ses|notre|votre|leur|nos|vos|leurs|mien|tien|sien|leur|miens|tiens|siens|nôtres|vôtres|mienne|tienne|sienne|miennes|tiennes|siennes)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+            break
+        case 'en':
+            debugger
+            rawArticle += htmlTexts
+                .join('\n')
+                .replace(/(.+?[,:.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
+                .replace(/(\b(I|you|he|we|you|they|we)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(to|from|the|a)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(but|or|and|so|however|neither|because|for|nor|yet)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(my|your|his|its|our|their|mine|hold|yours)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+                .replace(/(\b(yours|after|to|before|with|your house|against|in|of|from|behind|in front of|in|between|towards|up to|despite|by|during|for|without|unless|under|on|towards)\b.+?[,.!?:)\]}|])/gmi, x => '\n' + x)
+            break
+        default:
+            break
+    }
 
-            let splits = tempText.split(/<__SPLIT__>/g)
-            splits.forEach(split => {
-                rawArticle += split + '\n'
-            })
-        } else {
-            let title = '\n\n\n' + titleToSymbol(line.type, line.text, '#').text + ' ' + '\n\n'
-            rawArticle += title
-        }
-    });
     // always display results in console
     rawArticle += '\n\n' + separator + '\n\n';
 }
@@ -216,6 +221,9 @@ function getWordsOccurencesReport() {
     console.table(occurencesReport)
 }
 
+/**
+ * Create and insert a table with all splitted words
+ */
 function getWordsOccurencesReportHTML() {
 
     let text = htmlTextsFromPage.toLowerCase()
@@ -395,11 +403,17 @@ function mutateHtmlTextsOpacity() {
 }
 
 
+
 /**
  * Insert destructured data into HTML page with a "pre" tag.
  */
 function injectPreInHTML() {
     if (window) {
+        // always remove element (refresh effect)
+        let elm = document.querySelector('#orasyo-rawArticle')
+        if (elm) elm.remove()
+
+        // insert PRE element
         let pre = document.createElement("PRE")
         pre.id = 'orasyo-rawArticle'
         pre.innerText = rawArticle
