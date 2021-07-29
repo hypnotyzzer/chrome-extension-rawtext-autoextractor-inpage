@@ -82,7 +82,7 @@ function extractAllTitles() {
     rawArticle += '\n' + separator + '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, 'crimson')
+    injectPreInHTML(rawArticle, 'mediumpurple')
 }
 
 
@@ -159,7 +159,7 @@ function extractTextFromMainBody() {
     rawArticle += '\n\n' + separator + '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, 'mediumpurple')
+    injectPreInHTML(rawArticle, 'lightpink')
 }
 
 
@@ -197,7 +197,7 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     rawArticle += '\n\n' + separator + '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, `rgba(0, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
+    injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
 }
 
 
