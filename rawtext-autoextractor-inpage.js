@@ -445,7 +445,7 @@ function injectPreInHTML(text, borderColor) {
     if (window) {
         // insert PRE element
         let pre = document.createElement("PRE")
-        pre.class = 'orasyo-content-report'
+        pre.classList.add('orasyo-content-report')
         pre.innerText = text
         pre.style.margin = '1.1rem';
         pre.style.padding = '1.1rem';
@@ -460,7 +460,6 @@ function injectPreInHTML(text, borderColor) {
         pre.style.fontFamily = '"Lucida Console", "Courier New", monospace';
         pre.style.zIndex = '99999';
         document.body.appendChild(pre)
-        pre.scrollIntoView({ behavior: 'smooth' })
     }
 }
 
@@ -517,6 +516,11 @@ function injectButtonInHTML() {
                 mutateHtmlTextsOpacity()
 
                 getWordsOccurencesReportHTML()
+
+                // scroll to first pre
+                setTimeout(() => {
+                    document.querySelector('.orasyo-content-report').scrollIntoView({ behavior: 'smooth' })
+                }, 1000);
             }
             document.body.appendChild(btn)
         } catch (error) {
