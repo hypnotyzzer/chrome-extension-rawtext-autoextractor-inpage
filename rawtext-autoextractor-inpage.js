@@ -79,7 +79,6 @@ function extractAllTitles() {
         .forEach(x => rawArticle += '|' + x.type + '|' + x.text + '\n');
 
     // add separator after titles list
-    rawArticle += '\n' + separator + '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, 'mediumpurple')
@@ -90,7 +89,7 @@ function extractAllTitles() {
  * Extraction of all readeable content within the page.
  */
 function extractTextFromMainBody() {
-    rawArticle = 'MAIN CONTENT (RAW) : \n\n';
+    rawArticle = '\n\n' + separator + '\n\n' + 'MAIN CONTENT (RAW) : \n\n';
     rawArticle += '------------- \n\n';
 
     // html texts in page
@@ -114,7 +113,6 @@ function extractTextFromMainBody() {
     rawArticle += htmlTexts
         .join('\n')
         .replace(/(.+?[.!?)\]}|][\s\r\n])|(.+[\s\r\n])/gmi, x => x + '\n')
-    rawArticle += '\n\n' + separator + '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, 'dodgerblue')
@@ -122,7 +120,7 @@ function extractTextFromMainBody() {
 
 
 
-    rawArticle = 'MAIN CONTENT ( SPLIT ) : \n\n';
+    rawArticle = '\n\n' + separator + '\n\n' + 'MAIN CONTENT ( SPLIT ) : \n\n';
     rawArticle += '------------- \n\n';
 
     //
@@ -156,7 +154,6 @@ function extractTextFromMainBody() {
     }
 
     // always display results in console
-    rawArticle += '\n\n' + separator + '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, 'lightpink')
@@ -169,7 +166,7 @@ function extractTextFromMainBody() {
  * @param {string} regExFormula Example : "je|tu|il|nous|vous|ils|on"
  */
 function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|un|une") {
-    rawArticle = titleAsType + ' : \n\n';
+    rawArticle = '\n\n' + separator + '\n\n' + titleAsType + ' : \n\n';
     rawArticle += '------------- \n\n';
 
     let tempText = ""
@@ -194,7 +191,6 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     rawArticle += tempText
 
     // always display results in console
-    rawArticle += '\n\n' + separator + '\n\n';
     console.log(rawArticle);
 
     injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
@@ -426,33 +422,6 @@ function mutateHtmlTextsOpacity() {
 }
 
 
-/**
- * Insert destructured data into HTML page with a "pre" tag.
- */
-function injectPreInHTML____old() {
-    if (window) {
-        // always remove element (refresh effect)
-        let elm = document.querySelector('#orasyo-rawArticle')
-        if (elm) elm.remove()
-
-        // insert PRE element
-        let pre = document.createElement("PRE")
-        pre.id = 'orasyo-rawArticle'
-        pre.innerText = rawArticle
-        pre.style.margin = '1.1rem';
-        pre.style.padding = '1.1rem';
-        pre.style.paddingTop = '3.1rem';
-        pre.style.paddingLeft = '3.1rem';
-        pre.style.paddingBottom = '3.1rem';
-        pre.style.backgroundColor = 'black';
-        pre.style.color = 'lightGray';
-        pre.style.fontFamily = '"Lucida Console", "Courier New", monospace';
-        pre.style.zIndex = '99999';
-        document.body.appendChild(pre)
-        pre.scrollIntoView({ behavior: 'smooth' })
-    }
-}
-
 
 /**
  * Insert destructured data into HTML page with a "pre" tag.
@@ -532,7 +501,6 @@ function injectButtonInHTML() {
 
                 mutateHtmlTextsOpacity()
 
-                // injectPreInHTML()
                 getWordsOccurencesReportHTML()
             }
             document.body.appendChild(btn)
