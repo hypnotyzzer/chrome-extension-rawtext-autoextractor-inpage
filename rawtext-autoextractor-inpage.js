@@ -1,8 +1,8 @@
 //console.clear();
-let commonWordsDictionnary = getDictionnary() || []
+let commonWordsDictionnary = ''
 let separator = '===================================================================================';
 let rawArticle = '';
-let htmlTextsFromPage = extractPageText()
+let htmlTextsFromPage = ''
 
 // function findHighestElementArea(htmlElement) {
 //     let elm = Array.from(htmlElement)
@@ -19,9 +19,14 @@ let htmlTextsFromPage = extractPageText()
 //     return elm
 // }
 
+function setCommonWordsDictionnary() {
+    // set Common Words Dictionnary
+    return commonWordsDictionnary = getDictionnary() || []
+}
+
 function extractPageText() {
     // html texts in page
-    return Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
+    return htmlTextsFromPage = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
         .map(x => x.innerText.trim())
         .join('\n')
 }
@@ -418,40 +423,47 @@ function injectPreInHTML() {
  */
 function injectButtonInHTML() {
     if (window) {
-        let btn = document.createElement("button")
-        btn.innerText = 'Get Orasyo report'
-        btn.style.position = 'fixed';
-        btn.style.bottom = '33px';
-        btn.style.right = '13px';
-        btn.style.padding = '0.33rem';
-        btn.style.backgroundColor = 'black';
-        btn.style.color = 'dodgerblue';
-        btn.style.fontFamily = '"Lucida Console", "Courier New", monospace';
-        btn.style.zIndex = '99999';
-        btn.style.opacity = .33;
-        btn.onmouseover = () => {
-            btn.style.opacity = 1
-        }
-        btn.onmouseleave = () => {
-            btn.style.opacity = .33
-        }
-        btn.onclick = () => {
-            insertHeader()
-            extractAllTitles()
-            extractTextFromMainBody()
-            extractTextPortion("PRONOMS", 'je|tu|il|nous|vous|ils|on')
-            extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
-            extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
-            extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
-            extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
-            // getWordsOccurencesReport()
-            mutateHtmlTextsOpacity()
-            console.log(rawArticle);
+        try {
+            let btn = document.createElement("button")
+            btn.innerText = 'Get Orasyo report'
+            btn.style.position = 'fixed';
+            btn.style.bottom = '33px';
+            btn.style.right = '13px';
+            btn.style.padding = '0.33rem';
+            btn.style.backgroundColor = 'black';
+            btn.style.color = 'dodgerblue';
+            btn.style.fontFamily = '"Lucida Console", "Courier New", monospace';
+            btn.style.zIndex = '99999';
+            btn.style.opacity = .33;
+            btn.onmouseover = () => {
+                btn.style.opacity = 1
+            }
+            btn.onmouseleave = () => {
+                btn.style.opacity = .33
+            }
+            btn.onclick = () => {
+                setCommonWordsDictionnary()
+                extractPageText()
+                insertHeader()
+                extractAllTitles()
+                extractTextFromMainBody()
+                extractTextPortion("PRONOMS", 'je|tu|il|nous|vous|ils|on')
+                extractTextPortion("ARTICLES", 'à|au|au|aux|de|des|du|du|l\'|la|le|les|un|une')
+                extractTextPortion("COORDINATING CONJUNCTIONS", 'mais|o|et|donc|or|ni|car')
+                extractTextPortion("POSSESIFS", 'mon|ton|son|ma|ta|sa|mes|tes|ses|nos|vos')
+                extractTextPortion("PREPOSITIONS", 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers')
+                // getWordsOccurencesReport()
+                mutateHtmlTextsOpacity()
+                console.log(rawArticle);
 
-            injectPreInHTML()
-            getWordsOccurencesReportHTML()
+                injectPreInHTML()
+                getWordsOccurencesReportHTML()
+            }
+            document.body.appendChild(btn)
+        } catch (error) {
+            console.log('💥', '[ error in injectButtonInHTML() ] : ', error)
+            alert.log('[ 💥 error in injectButtonInHTML() ] : \n\n' + error)
         }
-        document.body.appendChild(btn)
     }
 }
 
