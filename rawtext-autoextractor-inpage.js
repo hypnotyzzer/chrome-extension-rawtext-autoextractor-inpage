@@ -61,7 +61,7 @@ function insertHeader() {
         + '\n\n' + 'Code location : C:/Users/hypno/Dropbox/Extension for Google Chrome/RawText-Autoextractor-InPage/rawtext-autoextractor-inpage.js'
         + '\n\n' + separator + '\n\n'
         + 'URL : ' + window.location
-        + '\n\n' + separator + '\n\n';
+        + '\n\n\n\n';
 }
 
 
@@ -84,6 +84,10 @@ function titleToSymbol(tagName, innerText, charSuite) {
 }
 
 
+function setTitleSectionSeparator(title) {
+    return separator + '\n\n' + title.toUpperCase() + ' : \n\n' + ''.padEnd(title.length + 2, '-') + '\n\n';
+}
+
 /**
  * Extraction of all titles within the page.
  *
@@ -91,8 +95,7 @@ function titleToSymbol(tagName, innerText, charSuite) {
 function extractAllTitles() {
     insertHeader()
 
-    rawArticle += 'TITLES : \n\n';
-    rawArticle += '-------- \n\n';
+    rawArticle += setTitleSectionSeparator('TITLES')
 
     Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6'))
         .map(x =>
@@ -112,8 +115,10 @@ function extractAllTitles() {
  * Extraction of all readeable content within the page.
  */
 function extractTextFromMainBody() {
-    rawArticle = separator + '\n\n' + 'MAIN CONTENT (RAW) : \n\n';
-    rawArticle += '------------- \n\n';
+    //
+    // RAW PART
+    //
+    rawArticle += setTitleSectionSeparator('MAIN CONTENT [ RAW ]')
 
     // html texts in page
     let htmlTexts = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
@@ -143,9 +148,10 @@ function extractTextFromMainBody() {
 
 
 
-
-    rawArticle = separator + '\n\n' + 'MAIN CONTENT ( SPLIT ) : \n\n';
-    rawArticle += '------------- \n\n';
+    //
+    // SPLITTED PART
+    //
+    rawArticle += setTitleSectionSeparator('MAIN CONTENT [ SPLIT ]')
 
     //
     // print text as splitted lines according to "ponctuation" or "special words"
@@ -180,8 +186,7 @@ function extractTextFromMainBody() {
  * @param {string} regExFormula Example : "je|tu|il|nous|vous|ils|on"
  */
 function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|un|une") {
-    rawArticle = separator + '\n\n' + titleAsType + ' : \n\n';
-    rawArticle += '------------- \n\n';
+    rawArticle = setTitleSectionSeparator(titleAsType)
 
     let tempText = ""
     let matchs = []
