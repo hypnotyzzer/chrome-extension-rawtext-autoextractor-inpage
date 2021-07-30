@@ -61,7 +61,7 @@ function insertHeader() {
         + '\n\n' + 'Code location : C:/Users/hypno/Dropbox/Extension for Google Chrome/RawText-Autoextractor-InPage/rawtext-autoextractor-inpage.js'
         + '\n\n' + separator + '\n\n'
         + 'URL : ' + window.location
-        + '\n\n\n\n';
+        + '\n\n';
 }
 
 
