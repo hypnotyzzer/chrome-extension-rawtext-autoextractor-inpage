@@ -171,7 +171,7 @@ function extractTextFromMainBody() {
     //
     // SPLITTED PART
     //
-    rawArticle += setTitleSectionSeparator('MAIN CONTENT [ SPLIT ]')
+    rawArticle = setTitleSectionSeparator('MAIN CONTENT [ SPLIT ]')
 
     //
     // print text as splitted lines according to "ponctuation" or "special words"
@@ -250,7 +250,7 @@ function extractAllURLS() {
         })
     console.table(urls)
 
-    rawArticle += urls.map(x => x.text + '\n       =>' + x.href).join('\n\n')
+    rawArticle += urls.map(x => x.text + '\n       => ' + x.href).join('\n\n')
 
     // always display results in console
     rawArticle += '\n\n';
@@ -485,6 +485,104 @@ function mutateHtmlTextsOpacity() {
     // // always display results in console
     // rawArticle += '\n\n' + separator + '\n\n';
 }
+
+
+function injectTabsInHTML() {
+    let div = document.createElement("DIV")
+    div.innerHTML = `
+    <div id="orasyo-tabs" class="tab">
+        <button class="tablinks" onclick="switchTab(event, 'Header')">Header</button>
+        <button class="tablinks" onclick="switchTab(event, 'MAIN CONTENT [ RAW ]')">MAIN CONTENT [ RAW ]</button>
+        <button class="tablinks" onclick="switchTab(event, 'MAIN CONTENT [ SPLIT ]')">MAIN CONTENT [ SPLIT ]</button>
+        <button class="tablinks" onclick="switchTab(event, 'PRONOUNS')">PRONOUNS</button>
+        <button class="tablinks" onclick="switchTab(event, 'ARTICLES')">ARTICLES</button>
+        <button class="tablinks" onclick="switchTab(event, 'COORDINATING CONJUNCTIONS')">COORDINATING CONJUNCTIONS</button>
+        <button class="tablinks" onclick="switchTab(event, 'POSSESIFS')">POSSESIFS</button>
+        <button class="tablinks" onclick="switchTab(event, 'PREPOSITIONS')">PREPOSITIONS</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Header" class="tabcontent">
+        <h3>Header</h3>
+        <p>London is the capital city of England.</p>
+    </div>
+
+    <div id="MAIN CONTENT [ RAW ]" class="tabcontent">
+        <h3>MAIN CONTENT [ RAW ]</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="MAIN CONTENT [ SPLIT ]" class="tabcontent">
+        <h3>MAIN CONTENT [ SPLIT ]</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+
+    <div id="PRONOUNS" class="tabcontent">
+        <h3>PRONOUNS</h3>
+        <p>PRONOUNS is the capital city of England.</p>
+    </div>
+
+    <div id="ARTICLES" class="tabcontent">
+        <h3>ARTICLES</h3>
+        <p>ARTICLES is the capital city of England.</p>
+    </div>
+
+    <div id="COORDINATING CONJUNCTIONS" class="tabcontent">
+        <h3>COORDINATING CONJUNCTIONS</h3>
+        <p>COORDINATING CONJUNCTIONS is the capital city of England.</p>
+    </div>
+
+    <div id="POSSESIFS" class="tabcontent">
+        <h3>POSSESIFS</h3>
+        <p>POSSESIFS is the capital city of England.</p>
+    </div>
+
+    <div id="PREPOSITIONS" class="tabcontent">
+        <h3>PREPOSITIONS</h3>
+        <p>PREPOSITIONS is the capital city of England.</p>
+    </div>
+
+    <style>
+        /* Style the tab */
+        .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+        background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+        background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+        }
+    </style>
+    `
+    document.body.appendChild(div)
+}
+
 
 
 /**
