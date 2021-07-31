@@ -504,48 +504,39 @@ function injectTabsInHTML() {
 
     <!-- Tab content -->
     <div id="Header" class="tabcontent">
-        <h3>Header</h3>
-        <div id="pre-header">London is the capital city of England.</div>
+        <div id="pre-header"></div>
     </div>
 
     <div id="MAIN CONTENT [ RAW ]" class="tabcontent">
-        <h3>MAIN CONTENT [ RAW ]</h3>
-        <div id="pre-content-raw">Paris is the capital of France.</div>
+        <div id="pre-content-raw"></div>
     </div>
 
     <div id="MAIN CONTENT [ SPLIT ]" class="tabcontent">
-        <h3>MAIN CONTENT [ SPLIT ]</h3>
-        <div id="pre-content-split">Tokyo is the capital of Japan.</div>
+        <div id="pre-content-split"></div>
     </div>
 
     <div id="PRONOUNS" class="tabcontent">
-        <h3>PRONOUNS</h3>
-        <div id="pre-pronouns">PRONOUNS is the capital city of England.</div>
+        <div id="pre-pronouns"></div>
     </div>
 
     <div id="ARTICLES" class="tabcontent">
-        <h3>ARTICLES</h3>
-        <div id="pre-articles">ARTICLES is the capital city of England.</div>
+        <div id="pre-articles"></div>
     </div>
 
     <div id="COORDINATING CONJUNCTIONS" class="tabcontent">
-        <h3>COORDINATING CONJUNCTIONS</h3>
-        <div id="pre-coordinating-conjunctions">COORDINATING CONJUNCTIONS is the capital city of England.</div>
+        <div id="pre-coordinating-conjunctions"></div>
     </div>
 
     <div id="POSSESIFS" class="tabcontent">
-        <h3>POSSESIFS</h3>
-        <div id="pre-possesifs">POSSESIFS is the capital city of England.</div>
+        <div id="pre-possesifs"></div>
     </div>
 
     <div id="PREPOSITIONS" class="tabcontent">
-        <h3>PREPOSITIONS</h3>
-        <div id="pre-prepositions">PREPOSITIONS is the capital city of England.</div>
+        <div id="pre-prepositions"></div>
     </div>
 
     <div id="URLS" class="tabcontent">
-        <h3>URLS</h3>
-        <div id="pre-urls">URLS is the capital city of England.</div>
+        <div id="pre-urls"></div>
     </div>
 
     <style>
@@ -671,7 +662,7 @@ function injectButtonInHTML() {
                 injectTabsInHTML()
                 extractAllTitles()
                 extractTextFromMainBody()
-                extractTextPortion("PRONOMS", PRONOUNS[language])
+                extractTextPortion("PRONOUNS", PRONOUNS[language])
                 extractTextPortion("ARTICLES", ARTICLES[language])
                 extractTextPortion("COORDINATING CONJUNCTIONS", COORDINATING_CONJUNCTIONS[language])
                 extractTextPortion("POSSESIFS", POSSESIVE[language])
