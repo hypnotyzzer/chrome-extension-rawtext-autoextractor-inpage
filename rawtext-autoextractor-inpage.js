@@ -127,7 +127,7 @@ function extractAllTitles() {
     rawArticle += '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, 'mediumpurple')
+    injectPreInHTML(rawArticle, 'mediumpurple', 'pre-header')
 }
 
 
@@ -164,7 +164,7 @@ function extractTextFromMainBody() {
     rawArticle += '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, 'dodgerblue')
+    injectPreInHTML(rawArticle, 'dodgerblue', 'pre-content-raw')
 
 
 
@@ -196,7 +196,7 @@ function extractTextFromMainBody() {
     rawArticle += '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, 'lightpink')
+    injectPreInHTML(rawArticle, 'lightpink', 'pre-content-split')
 }
 
 
@@ -233,7 +233,7 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     rawArticle += '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
+    injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`, 'pre-' + titleAsType.toLowerCase().replace(/\s+/g, '-'))
 }
 
 
@@ -256,7 +256,7 @@ function extractAllURLS() {
     rawArticle += '\n\n';
     console.log(rawArticle);
 
-    injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
+    injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`, 'pre-urls')
 }
 
 
@@ -499,47 +499,53 @@ function injectTabsInHTML() {
         <button class="tablinks" onclick="switchTab(event, 'COORDINATING CONJUNCTIONS')">COORDINATING CONJUNCTIONS</button>
         <button class="tablinks" onclick="switchTab(event, 'POSSESIFS')">POSSESIFS</button>
         <button class="tablinks" onclick="switchTab(event, 'PREPOSITIONS')">PREPOSITIONS</button>
+        <button class="tablinks" onclick="switchTab(event, 'URLS')">URLS</button>
     </div>
 
     <!-- Tab content -->
     <div id="Header" class="tabcontent">
         <h3>Header</h3>
-        <p>London is the capital city of England.</p>
+        <div id="pre-header">London is the capital city of England.</div>
     </div>
 
     <div id="MAIN CONTENT [ RAW ]" class="tabcontent">
         <h3>MAIN CONTENT [ RAW ]</h3>
-        <p>Paris is the capital of France.</p>
+        <div id="pre-content-raw">Paris is the capital of France.</div>
     </div>
 
     <div id="MAIN CONTENT [ SPLIT ]" class="tabcontent">
         <h3>MAIN CONTENT [ SPLIT ]</h3>
-        <p>Tokyo is the capital of Japan.</p>
+        <div id="pre-content-split">Tokyo is the capital of Japan.</div>
     </div>
 
     <div id="PRONOUNS" class="tabcontent">
         <h3>PRONOUNS</h3>
-        <p>PRONOUNS is the capital city of England.</p>
+        <div id="pre-pronouns">PRONOUNS is the capital city of England.</div>
     </div>
 
     <div id="ARTICLES" class="tabcontent">
         <h3>ARTICLES</h3>
-        <p>ARTICLES is the capital city of England.</p>
+        <div id="pre-articles">ARTICLES is the capital city of England.</div>
     </div>
 
     <div id="COORDINATING CONJUNCTIONS" class="tabcontent">
         <h3>COORDINATING CONJUNCTIONS</h3>
-        <p>COORDINATING CONJUNCTIONS is the capital city of England.</p>
+        <div id="pre-coordinating-conjunctions">COORDINATING CONJUNCTIONS is the capital city of England.</div>
     </div>
 
     <div id="POSSESIFS" class="tabcontent">
         <h3>POSSESIFS</h3>
-        <p>POSSESIFS is the capital city of England.</p>
+        <div id="pre-possesifs">POSSESIFS is the capital city of England.</div>
     </div>
 
     <div id="PREPOSITIONS" class="tabcontent">
         <h3>PREPOSITIONS</h3>
-        <p>PREPOSITIONS is the capital city of England.</p>
+        <div id="pre-prepositions">PREPOSITIONS is the capital city of England.</div>
+    </div>
+
+    <div id="URLS" class="tabcontent">
+        <h3>URLS</h3>
+        <div id="pre-urls">URLS is the capital city of England.</div>
     </div>
 
     <style>
@@ -584,11 +590,20 @@ function injectTabsInHTML() {
 }
 
 
+function removeTabsInHTML() {
+    if (window) {
+        // always remove element (refresh effect)
+        let elm = document.querySelector('.orasyo-tabs')
+        if (elm) elm.remove()
+    }
+}
+
+
 
 /**
  * Insert destructured data into HTML page with a "pre" tag.
  */
-function injectPreInHTML(text, borderColor) {
+function injectPreInHTML(text, borderColor, destinationTab) {
     if (window) {
         // insert PRE element
         let pre = document.createElement("PRE")
@@ -606,7 +621,7 @@ function injectPreInHTML(text, borderColor) {
         pre.style.borderLeftColor = borderColor;
         pre.style.fontFamily = '"Lucida Console", "Courier New", monospace';
         pre.style.zIndex = '99999';
-        document.body.appendChild(pre)
+        document.getElementById(destinationTab).appendChild(pre)
     }
 }
 
@@ -648,10 +663,12 @@ function injectButtonInHTML() {
             }
             btn.onclick = () => {
                 setCommonWordsDictionnary()
+                removeTabsInHTML()
                 removePreFromHTML()
                 findMainContentWithParagraphsArea()
                 extractPageText()
                 // inject pre's in page
+                injectTabsInHTML()
                 extractAllTitles()
                 extractTextFromMainBody()
                 extractTextPortion("PRONOMS", PRONOUNS[language])
