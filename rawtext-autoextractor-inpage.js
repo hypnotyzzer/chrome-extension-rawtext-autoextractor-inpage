@@ -542,38 +542,41 @@ function injectTabsInHTML() {
     <style>
         /* Style the tab */
         .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #2f2f2f;
         }
 
         /* Style the buttons that are used to open the tab content */
         .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-family: monospace;
+            color: chartreuse;
+            border: 1px solid chartreuse;
+            transition: 0.3s;
         }
 
         /* Change background color of buttons on hover */
         .tab button:hover {
-        background-color: #ddd;
+            background-color: #6f6f6f;
         }
 
         /* Create an active/current tablink class */
         .tab button.active {
-        background-color: #ccc;
+            color: #2f2f2f;
+            background-color: chartreuse;
         }
 
         /* Style the tab content */
         .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
+            display: none;
+            border: 1px solid #ccc;
+            border-top: none;
         }
     </style>
     `
@@ -600,7 +603,7 @@ function injectPreInHTML(text, borderColor, destinationTab) {
         let pre = document.createElement("PRE")
         pre.classList.add('orasyo-content-report')
         pre.innerText = text
-        pre.style.margin = '1.1rem';
+        // pre.style.margin = '1.1rem';
         pre.style.padding = '1.1rem';
         pre.style.paddingTop = '3.1rem';
         pre.style.paddingLeft = '3.1rem';
