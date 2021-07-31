@@ -25,20 +25,40 @@ const PREPOSITIONS = {
     en: 'yours|after|to|before|with|your house|against|in|of|from|behind|in front of|in|between|towards|up to|despite|by|during|for|without|unless|under|on|towards',
 }
 
-// function findHighestElementArea(htmlElement) {
-//     let elm = Array.from(htmlElement)
-//         //.filter(x=>x.tagName != 'SCRIPT')
-//         //.map(x=>x.getBoundingClientRect().width * x.getBoundingClientRect().height).sort((a,b)=>b-a)
-//         .reduce((max, elm) => {
-//             let area1 = elm.getBoundingClientRect().width * elm.getBoundingClientRect().height
-//             let area2 = max ? max.getBoundingClientRect().width * max.getBoundingClientRect().height : 0
-//             let highest = area1 > area2 ? elm : area1 < area2 ? max : elm
-//             max = highest
-//             return max
-//         }, null)
-//     findHighestElementArea(elm)
-//     return elm
-// }
+
+function findMainContentWithParagraphsArea() {
+    let elms = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
+    let results = []
+    elms.forEach(elm => {
+        while (elm.tagName != 'BODY') {
+            // calculation of pixels area
+            let area = Math.round(elm.getBoundingClientRect().width * elm.getBoundingClientRect().height)
+            // push area only if area not exist in array
+            if (results.find(x => x.area == area) == undefined) {
+                results.push({
+                    element: elm,
+                    tagName: elm.tagName,
+                    parags: elm.querySelectorAll('P').length,
+                    titles: elm.querySelectorAll('h1,h2,h3,h4,h5,h6').length,
+                    area,
+                })
+            }
+            elm = elm.parentNode
+        }
+    });
+
+    // set scores table sorted by biggest area
+    let scores = results
+        .filter(x => x.element.querySelector('H1') != null)
+        .filter(x => x.element.querySelector('P') != null)
+        .sort((a, b) => b.area - a.area)
+    console.table(scores)
+
+    let winner = scores[scores.length - 1].element
+    winner.style.border = "13px solid chartreuse";
+    console.log('📌', '[ winner ] : ', winner.innerText)
+    return winner
+}
 
 
 function setCommonWordsDictionnary() {
@@ -507,6 +527,7 @@ function injectButtonInHTML() {
             btn.onclick = () => {
                 setCommonWordsDictionnary()
                 removePreFromHTML()
+                findMainContentWithParagraphsArea()
                 extractPageText()
                 // inject pre's in page
                 extractAllTitles()
