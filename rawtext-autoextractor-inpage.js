@@ -237,6 +237,31 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
 }
 
 
+
+function extractAllURLS() {
+    rawArticle = setTitleSectionSeparator('URLS LIST')
+
+    let urls = Array.from(document.querySelectorAll('a'))
+        .map(x => {
+            return {
+                text: x.innerText.replace(/\n/g, ' '),
+                href: x.href
+            }
+        })
+    console.table(urls)
+
+    rawArticle += urls.map(x => x.text + '\n       =>' + x.href).join('\n\n')
+
+    // always display results in console
+    rawArticle += '\n\n';
+    console.log(rawArticle);
+
+    injectPreInHTML(rawArticle, `rgba(${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())}, ${Math.round(255 * Math.random())})`)
+}
+
+
+
+
 // function getWordsOccurencesReport() {
 //     rawArticle += 'WORDS OCCURENCES REPORT' + ' : \n\n';
 //     rawArticle += '------------- \n\n';
@@ -462,7 +487,6 @@ function mutateHtmlTextsOpacity() {
 }
 
 
-
 /**
  * Insert destructured data into HTML page with a "pre" tag.
  */
@@ -537,6 +561,7 @@ function injectButtonInHTML() {
                 extractTextPortion("COORDINATING CONJUNCTIONS", COORDINATING_CONJUNCTIONS[language])
                 extractTextPortion("POSSESIFS", POSSESIVE[language])
                 extractTextPortion("PREPOSITIONS", PREPOSITIONS[language])
+                extractAllURLS()
                 // getWordsOccurencesReport()
 
                 mutateHtmlTextsOpacity()
