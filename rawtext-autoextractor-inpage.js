@@ -679,7 +679,7 @@ function injectButtonInHTML() {
 
                 // scroll to first pre
                 setTimeout(() => {
-                    document.querySelector('.orasyo-content-report').scrollIntoView({ behavior: 'smooth' })
+                    document.querySelector('.orasyo-tabs').scrollIntoView({ behavior: 'smooth' })
                 }, 1000);
             }
             document.body.appendChild(btn)
