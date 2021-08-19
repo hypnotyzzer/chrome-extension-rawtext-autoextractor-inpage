@@ -24,7 +24,10 @@ const PREPOSITIONS = {
     fr: 'à|après|au|avant|avec|chez|contre|dans|de|depuis|derrière|devant|en|entre|envers|jusqu|malgré|par|pendant|pour|sans|sauf|sous|sur|vers',
     en: 'yours|after|to|before|with|your house|against|in|of|from|behind|in front of|in|between|towards|up to|despite|by|during|for|without|unless|under|on|towards',
 }
-
+const QUESTIONNING = {
+    fr: 'qui|quoi|où|quand|comment|combien|pourquoi',
+    en: 'who|what|where|when|why',
+}
 
 function findMainContentWithParagraphsArea() {
     let elms = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6,p'))
@@ -182,6 +185,7 @@ function extractTextFromMainBody() {
      * COORDINATING_CONJUNCTIONS
      * POSSESIVE
      * PREPOSITIONS
+     * QUESTIONNING
      */
     rawArticle += htmlTexts
         .join('\n')
@@ -191,6 +195,7 @@ function extractTextFromMainBody() {
         .replace(new RegExp(`(\\b(${COORDINATING_CONJUNCTIONS[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
         .replace(new RegExp(`(\\b(${POSSESIVE[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
         .replace(new RegExp(`(\\b(${PREPOSITIONS[language]})\\b.+?[,.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
+        .replace(new RegExp(`(\\b(${QUESTIONNING[language]})\\b.+?[.!?:)\\]}|])`, 'gmi'), x => '\n' + x)
 
     // always display results in console
     rawArticle += '\n\n';
@@ -213,7 +218,10 @@ function extractTextPortion(titleAsType = "ARTICLES", regExFormula = "de|des|du|
     let regexs = regExFormula.split('|')
     regexs.forEach(regx => {
         // extraction of text portion
-        const regex = new RegExp('(\\b)(' + regx + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi');
+        const regex = titleAsType == "QUESTIONNING"
+            ? new RegExp('\\b' + regx + '\\b[^.:!?]*[?]*', 'gmi') // questions only
+            : new RegExp('(\\b)(' + regx + ')(\\b)([^,;.:!?\\r\\n]*)([,;.:!?]*)', 'gmi') // all sentences
+            ;
         matchs = matchs.concat(htmlTextsFromPage.match(regex) || ['<<< No data available. >>>'])
     });
     tempText = matchs
@@ -499,6 +507,7 @@ function injectTabsInHTML() {
         <button class="tablinks" onclick="switchTab(event, 'COORDINATING CONJUNCTIONS')">COORDINATING CONJUNCTIONS</button>
         <button class="tablinks" onclick="switchTab(event, 'POSSESIFS')">POSSESIFS</button>
         <button class="tablinks" onclick="switchTab(event, 'PREPOSITIONS')">PREPOSITIONS</button>
+        <button class="tablinks" onclick="switchTab(event, 'QUESTIONNING')">QUESTIONNING</button>
         <button class="tablinks" onclick="switchTab(event, 'URLS')">URLS</button>
     </div>
 
@@ -533,6 +542,10 @@ function injectTabsInHTML() {
 
     <div id="PREPOSITIONS" class="tabcontent">
         <div id="pre-prepositions"></div>
+    </div>
+
+    <div id="QUESTIONNING" class="tabcontent">
+        <div id="pre-questionning"></div>
     </div>
 
     <div id="URLS" class="tabcontent">
@@ -670,6 +683,7 @@ function injectButtonInHTML() {
                 extractTextPortion("COORDINATING CONJUNCTIONS", COORDINATING_CONJUNCTIONS[language])
                 extractTextPortion("POSSESIFS", POSSESIVE[language])
                 extractTextPortion("PREPOSITIONS", PREPOSITIONS[language])
+                extractTextPortion("QUESTIONNING", QUESTIONNING[language])
                 extractAllURLS()
                 // getWordsOccurencesReport()
 
