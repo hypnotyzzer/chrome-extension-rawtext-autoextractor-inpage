@@ -706,7 +706,7 @@ function injectButtonInHTML() {
             div.style.height = '777px';
             div.style.background = '#313192';
             div.style.color = 'white';
-            div.innerHTML = '<iframe src="index.html"></iframe>'
+            div.innerHTML = '<iframe src="extractor.html"></iframe>'
             document.body.appendChild(div);
         } catch (error) {
             console.log('💥', '[ error in injectButtonInHTML() ] : ', error)
