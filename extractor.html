@@ -16,7 +16,7 @@
 
         <!-- FAKE DATA TO ANALYZE -->
         <div id="fake" class="container">
-            <div class="box">
+            <div class="box has-background-dark has-text-light">
                 <div style="text-align: center">HEY !!<br><br>Après réflexion certaines ont eu l'idée de créer ce topic
                     !<br><br>Dans ce topic, on se motive pour perdre du poids !<br>Tu peux partager tes expériences de
                     perte de
@@ -352,12 +352,13 @@
         <!--  -->
         <!--  -->
         <!--  -->
-        <div id="main">
-            {{ message }}
-
+        <div id="main" class="container my-6">
+            <div class="box">
+                <p>{{ message }}</p>
+            </div>
         </div>
     </div>
-    <script src="extractor.js"></script>
+    <script src="/extractor.js"></script>
 </body>
 
 </html>

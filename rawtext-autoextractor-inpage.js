@@ -703,10 +703,10 @@ function injectButtonInHTML() {
             let div = document.createElement('div');
             div.id = 'iframe-plugin-vuejs';
             div.style.width = '100%';
-            div.style.height = '777px';
+            div.style.height = 'auto';
             div.style.background = '#313192';
             div.style.color = 'white';
-            div.innerHTML = '<iframe src="extractor.html"></iframe>'
+            div.innerHTML = '<iframe src="/extractor.html" style="width: 100%; height: -webkit-fill-available;"></iframe>'
             document.body.appendChild(div);
         } catch (error) {
             console.log('💥', '[ error in injectButtonInHTML() ] : ', error)
