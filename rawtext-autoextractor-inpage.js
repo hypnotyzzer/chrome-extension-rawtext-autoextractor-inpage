@@ -697,6 +697,17 @@ function injectButtonInHTML() {
                 }, 1000);
             }
             document.body.appendChild(btn)
+            //
+            //
+            //
+            let div = document.createElement('div');
+            div.id = 'iframe-plugin-vuejs';
+            div.style.width = '100%';
+            div.style.height = '777px';
+            div.style.background = '#313192';
+            div.style.color = 'white';
+            div.innerHTML = '<iframe src="index.html"></iframe>'
+            document.body.appendChild(div);
         } catch (error) {
             console.log('💥', '[ error in injectButtonInHTML() ] : ', error)
             alert.log('[ 💥 error in injectButtonInHTML() ] : \n\n' + error)

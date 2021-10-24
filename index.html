@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto extractor in HTML pages</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- FAKE DATA TO ANALYZE -->
+        <div id="fake" class="container">
+            <div class="box">
+                <div style="text-align: center">HEY !!<br><br>Après réflexion certaines ont eu l'idée de créer ce topic
+                    !<br><br>Dans ce topic, on se motive pour perdre du poids !<br>Tu peux partager tes expériences de
+                    perte de
+                    poids<br>Tu peux parler de ta relation avec ton poids<br>Tu peux parler de tes échecs et de tes
+                    réussites<br><br>Tu peux poster :<br><br>des conseils, astuces qui facilitent la perte de
+                    poids<br>tes
+                    objectifs<br>ton programme de perte de poids<br>Tu peux râler,parler de ta baisse de morale,de tes
+                    difficultés<br>Tu peux soutenir les
+                    autres<br><br>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class="bbImageWrapper  js-lbImage"
+                        title="mal5l.gif" data-src="http://www.theloop.ca/wp-content/uploads/2015/06/mal5l.gif"
+                        data-lb-sidebar-href="" data-lb-caption-extra-html="" data-single-image="1">\t\t<img
+                            src="http://www.theloop.ca/wp-content/uploads/2015/06/mal5l.gif"
+                            data-url="http://www.theloop.ca/wp-content/uploads/2015/06/mal5l.gif" class="bbImage"
+                            data-zoom-target="1" style="" alt="mal5l.gif" title="" width="" height="" loading="lazy">\t
+                    </div><br><br>Bref ici on
+                    se soutien, on se motive pour tenir nos objectifs et avoir un corps dans lequel on se sent bien ! On
+                    parle de perte
+                    de poids, de recette mais aussi de bien être physique et
+                    mental.<br><br>\t\t\t\t\t\t\t\t\t\t\t\t\t<div class="bbImageWrapper  js-lbImage"
+                        title="tumblr_mmho93xEAH1ruw74xo1_250.gif"
+                        data-src="http://31.media.tumblr.com/a367ee66aafa29b7aa291730a5afe6a6/tumblr_mmho93xEAH1ruw74xo1_250.gif"
+                        data-lb-sidebar-href="" data-lb-caption-extra-html="" data-single-image="1">\t\t<img
+                            src="https://31.media.tumblr.com/a367ee66aafa29b7aa291730a5afe6a6/tumblr_mmho93xEAH1ruw74xo1_250.gif"
+                            data-url="http://31.media.tumblr.com/a367ee66aafa29b7aa291730a5afe6a6/tumblr_mmho93xEAH1ruw74xo1_250.gif"
+                            class="bbImage" data-zoom-target="1" style="" alt="tumblr_mmho93xEAH1ruw74xo1_250.gif"
+                            title="" width="" height="" loading="lazy">\t</div>
+                    <br><br>\t\t\t\t\t\t\t\t\t\t\t\t\t
+                    <div class="bbImageWrapper  js-lbImage" title="tumblr_nrbxdxv3ER1ut1kpfo1_500.gif"
+                        data-src="https://68.media.tumblr.com/03bada24aebb2dc69b6d04c1830ba3d9/tumblr_nrbxdxv3ER1ut1kpfo1_500.gif"
+                        data-lb-sidebar-href="" data-lb-caption-extra-html="" data-single-image="1">\t\t<img
+                            src="https://68.media.tumblr.com/03bada24aebb2dc69b6d04c1830ba3d9/tumblr_nrbxdxv3ER1ut1kpfo1_500.gif"
+                            data-url="https://68.media.tumblr.com/03bada24aebb2dc69b6d04c1830ba3d9/tumblr_nrbxdxv3ER1ut1kpfo1_500.gif"
+                            class="bbImage" data-zoom-target="1" style="" alt="tumblr_nrbxdxv3ER1ut1kpfo1_500.gif"
+                            title="" width="" height="" loading="lazy">\t</div>
+                    <br><br>\t\t\t\t\t\t\t\t\t\t\t\t\t
+                    <div class="bbImageWrapper  js-lbImage" title="tumblr_ni3zgu7eCO1qhj0azo1_500.gif"
+                        data-src="https://68.media.tumblr.com/b85cab7e47915c99a9703eebd3b46dce/tumblr_ni3zgu7eCO1qhj0azo1_500.gif"
+                        data-lb-sidebar-href="" data-lb-caption-extra-html="" data-single-image="1">\t\t<img
+                            src="https://68.media.tumblr.com/b85cab7e47915c99a9703eebd3b46dce/tumblr_ni3zgu7eCO1qhj0azo1_500.gif"
+                            data-url="https://68.media.tumblr.com/b85cab7e47915c99a9703eebd3b46dce/tumblr_ni3zgu7eCO1qhj0azo1_500.gif"
+                            class="bbImage" data-zoom-target="1" style="" alt="tumblr_ni3zgu7eCO1qhj0azo1_500.gif"
+                            title="" width="" height="" loading="lazy">\t</div><br><br>Que tu veuilles perdre 2 kilos 10
+                    kilos ou le
+                    double,tous le monde est le bienvenue. Tout le monde peut apporter sa pierre à l'édifice et faire de
+                    ce
+                    topic le
+                    plus vivant possible et le plus utile. Chacun à son niveau.<br><a
+                        href="https://www.instagram.com/bodyposipanda/" target="_blank" class="link link--external"
+                        rel="nofollow ugc noopener"> #bodypositivity</a>​
+                </div>Je me
+                lance, je démarre le premier post <img src="https://forum.mmzstatic.com/smilies/happy.gif"
+                    class="smilie" loading="lazy" alt=":happy:" title="happy    :happy:"
+                    data-shortname=":happy:"><br><br>Alors j'ai
+                toujours eu depuis le collège
+                un soucis avec le poids, j'étais pas ronde mais j'avais des petits moments de boulimie.<br>Au lycée ça
+                allait et au
+                début de mes années de fac aussi.<br>Puis a 23 ans je suis monté a 85 kg, pendant un an et
+                demi.<br><br>Y'a deux
+                ans ,je me suis motivée, j 'en avais marre que mon corps qui e correspondait à ma personnalité et moi
+                qui
+                suis coquette,
+                je ne pouvais pas m'habiller comme je voulais sans compter la honte que je ressentais.<br><br>J'ai
+                commencé à perdre
+                du poids en arrêtant de manger des cochonneries, ( ça a été dure a cause de mon addiction au sucre et au
+                chocolat ) en
+                arrêtant de manger des grosses portions,en arrêtant les pâtes normales pour privilégier le riz, pâte
+                complète
+                .<br>J'ai réussi à perdre 10 kg mais impossible de descendre sous les 70 KG, ma mère m'a expliqué que je
+                stagnais, que
+                mon corps s'était habitué à ces restrictions alimentaire et à mon nombre de calorie avalé par
+                jours.<br><br>Je me
+                suis inscrite au sport à la fac, séance de 50 mn intensive de cardio a midi à jeun pour un effet
+                maximum. Au
+                bout d'un
+                pois j'avais perdu 5-6 kg supplémentaire, j'étais autour des 65.<br>Et puis l'été j'arrêté les séances
+                pour me mettre
+                au yoga et en septembre 2015 j'étais autour de 60Kg !<br>j'étais super fière de moi, et je me sentais
+                bien
+                dans mon
+                corps ( plus de mal de dos, genoux,) mais aussi dans ma tête.<br><br>Cette année à cause d'une longue
+                dépression
+                j'ai pris 10 kg. J'attends que mes partiels se finissent ( 8 mai ) pour reprendre une bonne
+                alimentation, un
+                peu de
+                sport et atteindre mon poids optimale<br><br>Je vais commencer encore une fois à me désintoxiquer du
+                sucre, du
+                chocolat et de mes envie de KFC,et recommence la marche rapide au début ... Réintégrer les fruits ( la
+                banane ) et les
+                fruits secs.<img src="https://forum.mmzstatic.com/smilies/574802.gif" class="smilie" loading="lazy"
+                    alt=":supermad:" title="supermad    :supermad:" data-shortname=":supermad:">Ohh tu as pu créer le
+                topic <img src="https://forum.mmzstatic.com/smilies/puppy_2.png" class="smilie" loading="lazy"
+                    alt=":puppyeyes:" title="puppyeyes    :puppyeyes:" data-shortname=":puppyeyes:"><br><br><br>Bon
+                ben du coup je me lance aussi
+                dans ma petite histoire. <br><br>J'ai toujours été plutôt pulpeuse mais avec un poids au top, en gros
+                des belles
+                formes (on m'appelait Jennifer Lopez puis Kim Kardashian à cause de ma silhouette ultra mince mais mes
+                fesses rebondies
+                et énormes) mais rien d'alarmant. A 18 ans je pesais 53 kilos, mon poids de forme, j'alternais entre 48
+                et
+                53 kilos pour
+                1m58. Puis j'ai quitté le cocon familial, je suis arrivée en France avec sa nourriture bien grasse, les
+                fruits et
+                légumes hors de prix (ou de très mauvaise qualité dans les supermarchés) et avec mon budget étudiant
+                c'était
+                assez dur
+                de se nourrir correctement. Plus une bonne petite dépression et une mini phase boulimie je suis vite
+                montée.
+                Je me
+                retrouve avec de la cellulite partout, des vergetures sur toutes les jambes et les fesses, un gros
+                ventre
+                bien rond de
+                femme enceinte (alors que non), un double menton et des bras de petit poulet tout flasques. <br> <br>Je
+                n'arrive pas
+                à perdre, je déteste cuisiner, pas fan des légumes. Pourtant je mange très très peu sucré, je n'ai
+                jamais de
+                biscuit
+                chez moi, je ne grignote pas hors des repas. Donc c'est vraiment juste apprendre à manger à heures fixes
+                et
+                des repas
+                équilibrés qu'il me faut. Plus reprendre le sport, car je suis complètement sédentaire depuis 5 ans. Je
+                suis
+                actuellement à 76 kilos, ça fait mal, je ne me reconnais plus et moi qui ai toujours aimé m'habiller
+                bien
+                bah je ne peux
+                plus à cause de mon poids, car maintenant dans les boutiques c'est assez dur je trouve de trouver des
+                tenues
+                adaptés aux
+                personnes bouboules comme moi. <br>Donc voilà mes objectifs d'ici début juillet:<br><br>- Avoir perdu
+                au moins 6
+                kilos<br>- Aller 4 fois par semaine à la salle de sport <br>- Manger des légumes à chaque repas<br>-
+                Des fruits
+                tout les jours<br>- Ne plus consommer de Nutella<br>- Trouver des menus healthy et simple à faire (et
+                c'est là que
+                je galère vraiment) <br>- Ré équilibrer mon alimentation<br><br>Aller c'est faisable, donc go gogo
+                <img src="https://forum.mmzstatic.com/smilies/574802.gif" class="smilie" loading="lazy" alt=":supermad:"
+                    title="supermad    :supermad:" data-shortname=":supermad:"><a
+                    href="https://forums.madmoizelle.com/membres/234429/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="234429" data-username="@Let_Them_Eat_Cake" id="js-XFUniqueId43">@Let_Them_Eat_Cake</a>
+                <br>je me
+                permets de te conseiller ( on est là pour ça)<img src="https://forum.mmzstatic.com/smilies/happy.gif"
+                    class="smilie" loading="lazy" alt=":happy:" title="happy    :happy:"
+                    data-shortname=":happy:"><br>essaye
+                de ne pas trop te mettre
+                la barre haute, 4 fois par semaine en salle de sport c'est très dur et intensif peut être que deux fois
+                par
+                semaine pour
+                débuter c'est suffisant.<br><br>C'est important de commencer petit à petit .<br><br>Ls fruits,
+                attention parfois
+                c'est un faux amis, les fruit comme les raisins les pommes rouges, les clémentines à éviter le soi et
+                limiter en
+                journée. <br>La banane est ton ami, ultra nourrissant et pas trop sucrée ( a éviter quand elle est trop
+                mure), les
+                fruits sec ( qq noix) quand tu veux grignoter quelque chose.<br><br>Concernant recettes, la viande
+                blanche ( dinde,
+                poulet)et le foie ( si tu aime) a privilégié si tu n'est pas végétarienne, sinon y'a le tofu , steak de
+                tofu
+                aussi qui
+                est trés sain et nourrissant.<br>Boire 1.5l d'eau par jour, ça aide beaucoup aussi nettoyer le corps et
+                parfois on
+                croit avoir faim mais on a soif.<a href="https://forums.madmoizelle.com/membres/62464/" class="username"
+                    data-xf-init="member-tooltip" data-user-id="62464" data-username="@Naurore"
+                    id="js-XFUniqueId54">@Naurore</a> en
+                fait je sais que au niveau de mon corps 6 kilos c'est largement faisable car une fois que je me remet à
+                manger
+                correctement (légumes, fruits, viandes blanches, bonnes petites salades etc) sans me priver mais en
+                m'encadrant, et avec
+                des séances de sport bah le changement est radical, mon corps perd vraiment vite et pourtant je n'ai pas
+                la
+                sensation de
+                me priver car je mange à ma faim, en coupant toutes les sucreries et les repas trop caloriques, du coup
+                je
+                n'ai pas
+                connu ce côté "frustration" vu que je prenais du plaisir à manger ça. La raison pour laquelle j'ai tout
+                repris c'est que
+                je suis retombée quelques mois plus tard dans la spirale coca-sucré-fast-food-pizza. Je ne compte pas
+                vraiment les
+                calories, juste je fais attention à toujours avoir des légumes à chaque repas, je suis les indications
+                de ma
+                diététicienne et je perds 3 kilos par mois. <br>J'ai fini par ne plus suivre ce "régime" (ré-équilibrage
+                plutôt) faute
+                de temps et d'argent, car au final c'est ça qui me perds: faire à manger m'ennuie au plus haut point, je
+                deteste ça, je
+                ne sais pas faire des courses correctement.Je vous conseille d'aller lire le topic " Réequilibrage
+                Alimentaire " je
+                trouve qu'il fais un peu doublon avec celui-ci <img src="https://forum.mmzstatic.com/smilies/happy.gif"
+                    class="smilie" loading="lazy" alt=":happy:" title="happy    :happy:"
+                    data-shortname=":happy:"><br><br><a href="https://forums.madmoizelle.com/membres/62464/"
+                    class="username" data-xf-init="member-tooltip" data-user-id="62464" data-username="@Naurore"
+                    id="js-XFUniqueId62">@Naurore</a> merci pour toutes ses
+                explications
+                <img src="https://forum.mmzstatic.com/smilies/35.gif" class="smilie" loading="lazy" alt=":top:"
+                    title="top    :top:" data-shortname=":top:"> Perso avec tout ce qu'on trouve sur le net, je suis "
+                rassurée " d'avoir des conseils d'une
+                professionnelle. Et big up pour Zermati !! (que je n'arrive pourtant pas très bien à appliquer pour
+                l'instant mais on y
+                viendra)<br><br><a href="https://forums.madmoizelle.com/membres/189956/" class="username"
+                    data-xf-init="member-tooltip" data-user-id="189956" data-username="@Juda Bricot"
+                    id="js-XFUniqueId63">@Juda
+                    Bricot</a> Waou quelle évolution en si peu de temps ! Je suis jalouse <img
+                    src="https://forum.mmzstatic.com/smilies/yawn.gif" class="smilie" loading="lazy" alt=":yawn:"
+                    title="yawn    :yawn:" data-shortname=":yawn:"><br><br>Pour ma part, j'aimerais perdre 3 kilos et je
+                galère. J'alterne des phases où je
+                fais attention, je m'écoute, je mange a ma faim, en écoutant mes envies et d'autres (comme en ce moment)
+                où
+                " je mange
+                mes émotions " je mange parce que c'est bon (team gourmande de salé ET de sucré) même si j'ai pas faim
+                du
+                tout .. C'est
+                bête mais j'ai l'impression que pour y arriver il me faut vraiment un cadre, c'est aussi pour cela que
+                je
+                galère avec
+                Zermati je crois.<a href="https://forums.madmoizelle.com/membres/189956/" class="username"
+                    data-xf-init="member-tooltip" data-user-id="189956" data-username="@Juda Bricot"
+                    id="js-XFUniqueId74">@Juda
+                    Bricot</a> <br>Si ce n'est pas trop intime, quel site as-tu utilisé? Excellente ta perte de poids!
+                Quel est ton
+                poids "idéal"? (Au niveau santé et par rapport à ta taille)<br><br><br><a
+                    href="https://forums.madmoizelle.com/membres/62464/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="62464" data-username="@Naurore" id="js-XFUniqueId75">@Naurore</a> <br>Personnellement
+                je
+                vais
+                investir et m'inscrire au Club Med Gym, c'est une salle en région parisienne assez chère, mais qui offre
+                une
+                cinquantaine de cours collectifs intéressant, comme du Cycling, de L'aqua bike, de l'aqua fitness, du
+                yoga
+                etc... du
+                coup les plannings sont connus deux semaines à l'avance, on va s'inscrire aux cours que l'on souhaite
+                avoir
+                et on peut
+                aller à autant de cours que l'on veut. Je préfère cette formule là que celle d'une salle de sport
+                classique
+                car en ayant
+                des cours variés et encadrés je suis sûre de ne pas faire de bêtises. <br>Sinon je dirais que pour une
+                salle de sport
+                il ne faut pas nécessairement se précipiter sur les low-cost, car elles attirent du monde et sont
+                souvent
+                pleines à
+                craquer. Les cours collectifs proposés sont via un écran, donc pas vraiment d'encadrement si tu fais mal
+                quelque chose
+                (plus de risques de blessures). Il faut toujours aussi regarder l'état des vestiaires et des douches,
+                s'ils
+                sont lavés
+                régulièrement, Si la douche a de l'eau chaude etc (je sais que chez moi mon ballon d'eau chaude me
+                permet de
+                prendre
+                uniquement une seule douce dans la journée d'environ 5 min, donc après le sport je ne pourrai pas me
+                doucher
+                chez moi)
+                <br>Après il faut surtout que l'ambiance te convienne aussi, mon premier jour dans mon ancienne salle de
+                sport un mec
+                m'a engueulé parce que j'occupais "sa" machine, alors qu'il venait tout juste d'arriver, et les autres
+                membres l'ont
+                défendu, autant dire que je n'y suis plus retourné.<a
+                    href="https://forums.madmoizelle.com/membres/62464/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="62464" data-username="@Naurore" id="js-XFUniqueId84">@Naurore</a> <img
+                    src="https://forum.mmzstatic.com/smilies/35.gif" class="smilie" loading="lazy" alt=":top:"
+                    title="top    :top:" data-shortname=":top:"> n'en parlons plus alors. Je vais
+                pas
+                débattre , je tiens encore une fois à préciser que un des but de ce topic c'est de se donner des
+                conseils,
+                donc oui les
+                conseils qui marchent pour moi qui ont été validé par une nutritionniste je les donne à d'autre après
+                chacun
+                est libre
+                de voir si ça fonctionne ou pas.<img src="https://forum.mmzstatic.com/smilies/happy.gif" class="smilie"
+                    loading="lazy" alt=":happy:" title="happy    :happy:" data-shortname=":happy:"><br><br>Surtout
+                n'hésite pas à poster d'autre
+                conseils ici !!<br>et je m'excuse si mon message t'a semblé froid <img
+                    src="https://forum.mmzstatic.com/smilies/fleurs.gif" class="smilie" loading="lazy" alt=":fleur:"
+                    title="fleur    :fleur:" data-shortname=":fleur:"><br><br><a
+                    href="https://forums.madmoizelle.com/membres/114506/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="114506" data-username="@Aela." id="js-XFUniqueId85">@Aela.</a> justement on a beaucoup
+                réfléchi sur ce
+                point ! pour éviter de faire doublon justement.<br><br>j'ai visité le topic rééquilibrage alimentaire.
+                Le but de ce
+                topic c'est de ne pas parler uniquement du domaine alimentaire, mais aussi du coté bien être,
+                motivation,
+                psychologique,
+                du sport bref c'est vraiment pour se soutenir et se motiver !<br><br>bref ce topic est plus large que
+                seulement le
+                rééquilibrage alimentaireJe sens que ce topic va devenir ma nouvelle maison <img
+                    src="https://forum.mmzstatic.com/smilies/yawn.gif" class="smilie" loading="lazy" alt=":yawn:"
+                    title="yawn    :yawn:" data-shortname=":yawn:">j'ai un orale cet aprem mais j'ai pas du tout
+                confiance
+                en moi avec tous ces kilos que
+                j'ai pris <img src="https://forum.mmzstatic.com/smilies/goth.gif" class="smilie" loading="lazy"
+                    alt=":goth:" title="goth    :goth:" data-shortname=":goth:"><br><br><a
+                    href="https://forums.madmoizelle.com/membres/189956/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="189956" data-username="@Juda Bricot" id="js-XFUniqueId101">@Juda Bricot</a> <a
+                    href="https://forums.madmoizelle.com/membres/301981/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="301981" data-username="@Mintaka" id="js-XFUniqueId102">@Mintaka</a> je
+                n'aime plus courir aussi, au lycée j'adorais mais depuis je trouve ça ennuyeux, c'est pour ça que je
+                fais
+                que de la
+                marche rapide et des séance de cardioJe m'incruste sur ce topic également ! <br><br>Je ne suis pas
+                spécialement en
+                surpoids, mais j'ai un peu de mal avec mon corps. Je ne fait pas de gros yoyo avec mon poids, mais je
+                remarque très
+                rapidement les quelques kilos qui vont et viennent, et les vergetures cuisses/fesses aussi ...
+                <br>L'année
+                dernière
+                après les études, recherche d'emploi qui n'aboutissait pas, j'ai déménager avec mon beau-père donc coté
+                bouffe, du grand
+                n'importe quoi, et le moral n'a pas aidé. Je suis monté de 62 à 68 kg. Énormément de vergetures sont
+                apparues à
+                l’intérieur des cuisses, et quelques unes sur le ventre, et j'ai eu énormément de mal à accepter mon
+                corps
+                après ça.
+                J'ai donc calmer le soda/sucrerie/pizza et suis redescendue à 66/65. Je suis ensuite partie en formation
+                militaire deux
+                semaines, ce qui m'a permis de redescendre gentiment à 63 kgs.<br><br>Depuis janvier, j'ai repris 2 kgs.
+                Je suis
+                remonté à 65kgs, j'essaye de cuisinier assez sein, de limiter les sodas ( je déteste me privé
+                complètement
+                coté
+                bouffe/boissons ) et je ne grignote pas, mais rien à faire pour redescendre. J'ai également chopper une
+                tendinite au
+                genou, donc je suis au repos total pour un petit moment niveau sport/musculation, ce qui n'aide pas.
+                <br>J'aimerai
+                redescendre au moins à 62 kgs <img src="https://forum.mmzstatic.com/smilies/dada.gif" class="smilie"
+                    loading="lazy" alt=":attaque:" title="attaque    :attaque:" data-shortname=":attaque:"><a
+                    href="https://forums.madmoizelle.com/membres/301981/" class="username" data-xf-init="member-tooltip"
+                    data-user-id="301981" data-username="@Mintaka" id="js-XFUniqueId120">@Mintaka</a> c'est pas trop "la
+                mode " en
+                France malheureusement la.marche rapide mais aux états unis par exemple c'est beaucoup plus
+                pratiquer.<br>Et y a plein
+                de bienfaits en plus de la perte de poids. <img src="https://forum.mmzstatic.com/smilies/happy.gif"
+                    class="smilie" loading="lazy" alt=":happy:" title="happy    :happy:" data-shortname=":happy:">
+
+            </div>
+        </div>
+
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <div id="main">
+            {{ message }}
+
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
