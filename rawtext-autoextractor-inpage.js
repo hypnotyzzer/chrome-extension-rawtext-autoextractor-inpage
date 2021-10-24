@@ -698,16 +698,16 @@ function injectButtonInHTML() {
             }
             document.body.appendChild(btn)
             //
+            // VUEJS injection
             //
-            //
-            let div = document.createElement('div');
-            div.id = 'iframe-plugin-vuejs';
-            div.style.width = '100%';
-            div.style.height = 'auto';
-            div.style.background = '#313192';
-            div.style.color = 'white';
-            div.innerHTML = '<iframe src="/extractor.html" style="width: 100%; height: 777px; border: 13px solid black;"></iframe>'
-            document.body.appendChild(div);
+            // let div = document.createElement('div');
+            // div.id = 'iframe-plugin-vuejs';
+            // div.style.width = '100%';
+            // div.style.height = 'auto';
+            // div.style.background = '#313192';
+            // div.style.color = 'white';
+            // div.innerHTML = '<iframe src="/extractor.html" style="width: 100%; height: 777px; border: 13px solid black;"></iframe>'
+            // document.body.appendChild(div);
         } catch (error) {
             console.log('💥', '[ error in injectButtonInHTML() ] : ', error)
             alert.log('[ 💥 error in injectButtonInHTML() ] : \n\n' + error)
